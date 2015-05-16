@@ -1,0 +1,250 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;3.&nbsp;HTTP state management</title><link rel="stylesheet" type="text/css" href="css/hc-tutorial.css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"><link rel="home" href="index.html" title="HttpClient Tutorial"><link rel="up" href="index.html" title="HttpClient Tutorial"><link rel="prev" href="connmgmt.html" title="Chapter&nbsp;2.&nbsp;Connection management"><link rel="next" href="authentication.html" title="Chapter&nbsp;4.&nbsp;HTTP authentication"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="banner"><a class="bannerLeft" href="http://www.apache.org/" title="Apache Software Foundation"><img style="border:none;" src="images/asf_logo_wide.gif"></a><a class="bannerRight" href="http://hc.apache.org/httpcomponents-client-ga/" title="Apache HttpComponents Client"><img style="border:none;" src="images/hc_logo.png"></a><div class="clear"></div></div><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;3.&nbsp;HTTP state management</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="connmgmt.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="authentication.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;3.&nbsp;HTTP state management"><div class="titlepage"><div><div><h2 class="title"><a name="statemgmt"></a>Chapter&nbsp;3.&nbsp;HTTP state management</h2></div></div></div>
+    
+    <p>Originally HTTP was designed as a stateless, request / response oriented protocol that
+        made no special provisions for stateful sessions spanning across several logically related
+        request / response exchanges. As HTTP protocol grew in popularity and adoption more and more
+        systems began to use it for applications it was never intended for, for instance as a
+        transport for e-commerce applications. Thus, the support for state management became a
+        necessity.</p>
+    <p>Netscape Communications, at that time a leading developer of web client and server
+        software, implemented support for HTTP state management in their products based on a
+        proprietary specification. Later, Netscape tried to standardise the mechanism by publishing
+        a specification draft. Those efforts contributed to the formal specification defined through
+        the RFC standard track. However, state management in a significant number of applications is
+        still largely based on the Netscape draft and is incompatible with the official
+        specification. All major developers of web browsers felt compelled to retain compatibility
+        with those applications greatly contributing to the fragmentation of standards
+        compliance.</p>
+    <div class="section" title="3.1.&nbsp;HTTP cookies"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e499"></a>3.1.&nbsp;HTTP cookies</h2></div></div></div>
+        
+        <p>An HTTP cookie is a token or short packet of state information that the HTTP agent and the
+            target server can exchange to maintain a session. Netscape engineers used to refer to it
+            as a "magic cookie" and the name stuck.</p>
+        <p>HttpClient uses the <code class="interfacename">Cookie</code> interface to represent an
+            abstract cookie token. In its simplest form an HTTP cookie is merely a name / value pair.
+            Usually an HTTP cookie also contains a number of attributes such a domain for which is
+            valid, a path that specifies the subset of URLs on the origin server to which this
+            cookie applies, and the maximum period of time for which the cookie is valid.</p>
+        <p>The <code class="interfacename">SetCookie</code> interface represents a
+                <code class="literal">Set-Cookie</code> response header sent by the origin server to the HTTP
+            agent in order to maintain a conversational state.</p>
+        <p>The <code class="interfacename">ClientCookie</code> interface extends <code class="interfacename">
+            Cookie</code> interface with additional client specific functionality such
+            as the ability to retrieve original cookie attributes exactly as they were specified
+            by the origin server. This is important for generating the <code class="literal">Cookie</code>
+            header because some cookie specifications require that the  <code class="literal">Cookie</code>
+            header should include certain attributes only if they were specified in the
+            <code class="literal">Set-Cookie</code> header.</p>
+        <p>Here is an example of creating a client-side cookie object:</p>
+        <pre class="programlisting">
+BasicClientCookie cookie = new BasicClientCookie("name", "value");
+// Set effective domain and path attributes
+cookie.setDomain(".mycompany.com");
+cookie.setPath("/");
+// Set attributes exactly as sent by the server
+cookie.setAttribute(ClientCookie.PATH_ATTR, "/");
+cookie.setAttribute(ClientCookie.DOMAIN_ATTR, ".mycompany.com");
+</pre>
+    </div>
+    <div class="section" title="3.2.&nbsp;Cookie specifications"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e515"></a>3.2.&nbsp;Cookie specifications</h2></div></div></div>
+        
+        <p>The <code class="interfacename">CookieSpec</code> interface represents a cookie management
+            specification. The cookie management specification is expected to enforce:</p>
+        <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+                <p>rules of parsing <code class="literal">Set-Cookie</code> headers.</p>
+            </li><li class="listitem">
+                <p>rules of validation of parsed cookies.</p>
+            </li><li class="listitem">
+                <p>formatting of <code class="literal">Cookie</code> header for a given host, port and path
+                    of origin.</p>
+            </li></ul></div>
+        <p>HttpClient ships with several <code class="interfacename">CookieSpec</code>
+            implementations:</p>
+        <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+                <p title="Standard strict:">
+                    <b>Standard strict:&nbsp;</b>
+                    State management policy compliant with the syntax and semantics of
+                        the well-behaved profile defined by RFC 6265, section 4.
+                </p>
+            </li><li class="listitem">
+                <p title="Standard:">
+                    <b>Standard:&nbsp;</b>
+                    State management policy compliant with a more relaxed profile defined
+                        by RFC 6265, section 4 intended for interoperability with existing servers
+                        that do not conform to the well behaved profile.
+                </p>
+            </li><li class="listitem">
+                <p title="Netscape draft (obsolete):">
+                    <b>Netscape draft (obsolete):&nbsp;</b>
+                    This policy conforms to the original draft specification published
+                        by Netscape Communications. It should be avoided unless absolutely necessary
+                        for compatibility with legacy code.
+                </p>
+            </li><li class="listitem">
+                <p title="RFC 2965 (obsolete):">
+                    <b>RFC 2965 (obsolete):&nbsp;</b>
+                    State management policy compliant with the obsolete state management
+                        specification defined by RFC 2965. Please do not use in new applications.
+                    
+                </p>
+            </li><li class="listitem">
+                <p title="RFC 2109 (obsolete):">
+                    <b>RFC 2109 (obsolete):&nbsp;</b>
+                    State management policy compliant with the obsolete state management
+                        specification defined by RFC 2109. Please do not use in new applications.
+                    
+                </p>
+            </li><li class="listitem">
+                <p title="Browser compatibility (obsolete):">
+                    <b>Browser compatibility (obsolete):&nbsp;</b>
+                    This policy strives to closely mimic the (mis)behavior of older versions
+                        of browser applications such as Microsoft Internet Explorer and Mozilla
+                        FireFox. Please do not use in new applications.
+                </p>
+            </li><li class="listitem">
+                <p title="Default:">
+                    <b>Default:&nbsp;</b>
+                    Default cookie policy is a synthetic policy that picks up either RFC 2965,
+                        RFC 2109 or Netscape draft compliant implementation based on properties of
+                        cookies sent with the HTTP response (such as version attribute,
+                        now obsolete). This policy will be deprecated in favor of the
+                        standard (RFC 6265 compliant) implementation in the next minor release
+                        of HttpClient.
+                </p>
+            </li><li class="listitem">
+                <p title="Ignore cookies:">
+                    <b>Ignore cookies:&nbsp;</b>
+                    All cookies are ignored.
+                </p>
+            </li></ul></div>
+        <p>It is strongly recommended to use either <code class="literal">Standard</code> or
+            <code class="literal">Standard strict</code> policy in new applications. Obsolete specifications
+            should be used for compatibility with legacy systems only. Support for obsolete
+            specifications will be removed in the next major release of HttpClient.
+        </p>
+    </div>
+    <div class="section" title="3.3.&nbsp;Choosing cookie policy"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e566"></a>3.3.&nbsp;Choosing cookie policy</h2></div></div></div>
+        
+        <p>Cookie policy can be set at the HTTP client and overridden on the HTTP request level
+            if required.</p>
+        <pre class="programlisting">
+RequestConfig globalConfig = RequestConfig.custom()
+        .setCookieSpec(CookieSpecs.DEFAULT)
+        .build();
+CloseableHttpClient httpclient = HttpClients.custom()
+        .setDefaultRequestConfig(globalConfig)
+        .build();
+RequestConfig localConfig = RequestConfig.copy(globalConfig)
+        .setCookieSpec(CookieSpecs.STANDARD_STRICT)
+        .build();
+HttpGet httpGet = new HttpGet("/");
+httpGet.setConfig(localConfig);
+</pre>
+    </div>
+    <div class="section" title="3.4.&nbsp;Custom cookie policy"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e570"></a>3.4.&nbsp;Custom cookie policy</h2></div></div></div>
+        
+        <p>In order to implement a custom cookie policy one should create a custom implementation
+            of the <code class="interfacename">CookieSpec</code> interface, create a
+                <code class="interfacename">CookieSpecProvider</code> implementation to create and
+            initialize instances of the custom specification and register the factory with
+            HttpClient. Once the custom specification has been registered, it can be activated the
+            same way as a standard cookie specification.</p>
+        <pre class="programlisting">
+PublicSuffixMatcher publicSuffixMatcher = PublicSuffixMatcherLoader.getDefault();
+
+Registry&lt;CookieSpecProvider&gt; r = RegistryBuilder.&lt;CookieSpecProvider&gt;create()
+        .register(CookieSpecs.DEFAULT,
+                new DefaultCookieSpecProvider(publicSuffixMatcher))
+        .register(CookieSpecs.STANDARD,
+                new RFC6265CookieSpecProvider(publicSuffixMatcher))
+        .register("easy", new EasySpecProvider())
+        .build();
+
+RequestConfig requestConfig = RequestConfig.custom()
+        .setCookieSpec("easy")
+        .build();
+
+CloseableHttpClient httpclient = HttpClients.custom()
+        .setDefaultCookieSpecRegistry(r)
+        .setDefaultRequestConfig(requestConfig)
+        .build();
+</pre>
+    </div>
+    <div class="section" title="3.5.&nbsp;Cookie persistence"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e576"></a>3.5.&nbsp;Cookie persistence</h2></div></div></div>
+        
+        <p>HttpClient can work with any physical representation of a persistent cookie store that
+            implements the <code class="interfacename">CookieStore</code> interface. The default
+                <code class="interfacename">CookieStore</code> implementation called
+                <code class="classname">BasicCookieStore</code> is a simple implementation backed by a
+                <code class="classname">java.util.ArrayList</code>. Cookies stored in an
+                <code class="classname">BasicClientCookie</code> object are lost when the container object
+            get garbage collected. Users can provide more complex implementations if
+            necessary.</p>
+        <pre class="programlisting">
+// Create a local instance of cookie store
+CookieStore cookieStore = new BasicCookieStore();
+// Populate cookies if needed
+BasicClientCookie cookie = new BasicClientCookie("name", "value");
+cookie.setDomain(".mycompany.com");
+cookie.setPath("/");
+cookieStore.addCookie(cookie);
+// Set the store
+CloseableHttpClient httpclient = HttpClients.custom()
+        .setDefaultCookieStore(cookieStore)
+        .build();
+</pre>
+    </div>
+    <div class="section" title="3.6.&nbsp;HTTP state management and execution context"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e585"></a>3.6.&nbsp;HTTP state management and execution context</h2></div></div></div>
+        
+        <p>In the course of HTTP request execution HttpClient adds the following state management
+            related objects to the execution context:</p>
+        <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+                <p>
+                    <code class="interfacename">Lookup</code> instance representing the actual
+                        cookie specification registry. The value of this attribute set in the local
+                        context takes precedence over the default one.
+                </p>
+            </li><li class="listitem">
+                <p>
+                    <code class="interfacename">CookieSpec</code> instance representing the actual
+                        cookie specification.
+                </p>
+            </li><li class="listitem">
+                <p>
+                    <code class="classname">CookieOrigin</code> instance representing the actual
+                        details of the origin server.
+                </p>
+            </li><li class="listitem">
+                <p>
+                    <code class="interfacename">CookieStore</code> instance representing the actual
+                        cookie store. The value of this attribute set in the local context takes
+                        precedence over the default one.
+                </p>
+            </li></ul></div>
+        <p>The local <code class="interfacename">HttpContext</code> object can be used to customize
+            the HTTP state management context prior to request execution, or to examine its state after
+            the request has been executed. One can also use separate execution contexts in order
+            to implement per user (or per thread) state management. A cookie specification registry
+            and cookie store defined in the local context will take precedence over the default
+            ones set at the HTTP client level</p>
+        <pre class="programlisting">
+CloseableHttpClient httpclient = &lt;...&gt;
+
+Lookup&lt;CookieSpecProvider&gt; cookieSpecReg = &lt;...&gt;
+CookieStore cookieStore = &lt;...&gt;
+
+HttpClientContext context = HttpClientContext.create();
+context.setCookieSpecRegistry(cookieSpecReg);
+context.setCookieStore(cookieStore);
+HttpGet httpget = new HttpGet("http://somehost/");
+CloseableHttpResponse response1 = httpclient.execute(httpget, context);
+&lt;...&gt;
+// Cookie origin details
+CookieOrigin cookieOrigin = context.getCookieOrigin();
+// Cookie spec used
+CookieSpec cookieSpec = context.getCookieSpec();
+</pre>
+    </div>
+</div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="connmgmt.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="authentication.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;2.&nbsp;Connection management&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;HTTP authentication</td></tr></table></div></body></html>
