@@ -1,7 +1,3 @@
-# Spider
-        -----zeekEye
-Create a unique spider.
+# Spider'Union
 
-A spider about sina web.
-
-blog address:cnblogs.com/crazyacking
+this is a Spider'Union,you can download this project to improve.
