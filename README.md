@@ -2,7 +2,11 @@
 ##-- Programmable spidering of web sites with Java
 ============
 
-新浪微博爬虫，采用Java语言开发，使用hetrix爬虫架构，基于HTTPClient4.0和Apache4.0网络包  采用SQLServer存储爬取数据，支持多进程并发执行。  功能包括：模拟微博登录、爬取微博用户信息、用户评论、提取数据、建立数据表、互粉推荐。待更新...  
+新浪微博爬虫，采用Java语言开发，使用hetrix爬虫架构，基于HTTPClient4.0和Apache4.0网络包。
+
+采用SQLServer存储爬取数据，支持多进程并发执行。
+
+功能包括：模拟微博登录、爬取微博用户信息、用户评论、提取数据、建立数据表、互粉推荐。待更新...  
 欢迎Fork!!!
 
 
@@ -40,7 +44,7 @@
 * `hosts` - A string -- or an array of string -- representing the `host` part of the targeted URL(s).
 * `pattern` - The pattern against which spider tries to match the remaining (`pathname` + `search` + `hash`) of the URL(s).
 * `cb` - A function of the form `function(window, $)` where
-  * `this` - Will be a variable referencing the `Routes.match` return object/value with some other goodies added from spider. For more info see https://github.com/aaronblohowiak/routes.js
+  * `this` - Will be a variable referencing the `Routes.match` return object/value with some other goodies added from spider. For more info see http://www.cnblogs.com/crazyacking/category/686354.html
   * `window` - Will be a variable referencing the document's window.
   * `$` - Will be the variable referencing the jQuery Object.
 
