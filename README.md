@@ -1,6 +1,5 @@
 # weibo-Spider
 ##-- Programmable spidering of web sites with Java
-weibo-spider
 ============
 
 新浪微博爬虫，采用Java语言开发，使用hetrix爬虫架构，基于HTTPClient 4.0和Apache4.0网络包，采用SQLServer存储爬取数据，支持多进程并发执行。
