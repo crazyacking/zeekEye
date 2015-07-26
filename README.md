@@ -13,15 +13,12 @@
 
 ## 安装
 
-使用以下代码:
-
 <pre>
   git clone git@github.com:crazyacking/Spider--Java.git
   cd Spider--Java
 </pre>
-
-## API(如何使用)
 默认编辑器是IntelliJ IDEA 14.1.4，Eclipse也能完美运行.
+## API(如何使用)
 ### Creating a Spider
 <pre>
   var spider = require('spider');
