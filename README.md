@@ -27,11 +27,11 @@
 
 #### weibo-Spider(选项)
 
-"选项"包含一下字段：
+"选项"包含以下字段：
 * `maxSockets` - 线程池中最大并行线程数. 默认为 `4`.
 * `userAgent` - 发送到远程服务器的用户代理请求. 默认为 `Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7` (firefox userAgent String).
-* `cache` -  用作缓存的缓存对象。默认为非缓存，看最新代码缓存对象的实现细节。
-* `pool` - 一个包含该请求代理的哈希对象。如果省略，将使用全局设置的maxsockets。
+* `cache` -  缓存对象。默认为非缓存，具体看最新版本代码缓存对象的实现细节。
+* `pool` - 一个包含该请求代理的哈希线程池。如果省略，将使用全局设置的maxsockets。
 
 ### 添加路由处理程序
 
