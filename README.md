@@ -61,3 +61,8 @@
 
 ### 设置冗余/日志级别
 `spider.log(level)` - Where `level` is a string that can be any of `"debug"`, `"info"`, `"error"`
+
+###Source Code
+The source code of Spider Queen is made available for study purposes only. Neither it, its source code, nor its byte code may be modified and recompiled for public use by anyone except us.
+
+We do accept and encourage private modifications with the intent for said modifications to be added to the official public version.
