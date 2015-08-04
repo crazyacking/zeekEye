@@ -1,5 +1,5 @@
-# weibo-Spider
-##-- Programmable spidering of web sites with Java
+# zeekEye
+##-- weibo-Spider , Programmable spidering of web sites with Java
 ============
 
 新浪微博爬虫，采用Java语言开发，基于hetrix爬虫架构,使用HTTPClient4.0和Apache4.0网络包.
