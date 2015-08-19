@@ -45,11 +45,11 @@
   * `window` - Will be a variable referencing the document's window.
   * `$` - Will be the variable referencing the jQuery Object.
 
-### 爬虫抓取网址队列.
+### 爬虫抓取url队列.
 
 `spider.get(url)`其中'url'是要抓取的网络url.
 
-### 拓宽 / 更新缓存
+### 拓展 / 更新缓存
 
 目前更新缓存提供了以下方法:
 
