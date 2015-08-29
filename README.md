@@ -51,10 +51,10 @@
 
 ### 拓展 / 更新缓存
 
-目前更新缓存提供了以下方法:
+目前更新缓存暂提供以下方法:
 
 * `get(url, cb)` - Returns `url`'s `body` field via the `cb` callback/continuation if it exists. Returns `null` otherwise.
-  * `cb` - Must be of the form `function(retval) {...}`
+  * `cb` - Must be of the form `function(retval) {...}'
 * `getHeaders(url, cb)` - Returns `url`'s `headers` field via the `cb` callback/continuation if it exists. Returns `null` otherwise.
   * `cb` - Must be of the form `function(retval) {...}`
 * `set(url, headers, body)` - Sets/Saves `url`'s `headers` and `body` in the cache.
