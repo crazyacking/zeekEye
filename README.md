@@ -1,7 +1,7 @@
 # zeekEye
 ##-- Programmable spidering of web sites with Java
 
-@(网络爬虫)[新浪微博|数据分析|帮助]
+网络爬虫|新浪微博|数据分析|帮助
 
 **zeekEye**是一款新浪微博爬虫，采用`Java`语言开发，基于`hetrix`爬虫架构,使用`HTTPClient4.0`和`Apache4.0`网络包.
 
@@ -67,7 +67,7 @@
 `spider.log(level)` - Where `level` is a string that can be any of `"debug"`, `"info"`, `"error"`
 
 ###Source Code
-The source code of Spider Queen is made available for study purposes only. Neither it, its source code, nor its byte code may be modified and recompiled for public use by anyone except us.
+The source code of zeekEye is made available for study purposes only. Neither it, its source code, nor its byte code may be modified and recompiled for public use by anyone except us.
 
 We do accept and encourage private modifications with the intent for said modifications to be added to the official public version.
 
