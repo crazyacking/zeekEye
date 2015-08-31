@@ -73,7 +73,7 @@ We do accept and encourage private modifications with the intent for said modifi
 
 
 ## 反馈与建议
-- 微博：[@crazyacking](http://weibo.com/u/3736544454)，[@GGock](http://weibo.com/ggock "crazyacking")
+- 微博：[@crazyacking](http://weibo.com/u/3736544454)
 - 邮箱：<crazyacking@gmail.com>
 
 ---------
