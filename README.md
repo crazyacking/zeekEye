@@ -1,29 +1,36 @@
 # zeekEye
 ##-- Programmable spidering of web sites with Java
-============
 
-新浪微博爬虫，采用Java语言开发，基于hetrix爬虫架构,使用HTTPClient4.0和Apache4.0网络包.
+@(网络爬虫)[新浪微博|数据分析|帮助]
 
-采用SQL Server数据库存储数据，支持多线程并发操作.
+**zeekEye**是一款新浪微博爬虫，采用`Java`语言开发，基于`hetrix`爬虫架构,使用`HTTPClient4.0`和`Apache4.0`网络包.
 
+特点概述：
+
+- **数据存储**：采用`SQL Server`数据库存储数据，支持多线程并发操作.
+
+- **功能丰富**：
 功能包括：模拟微博登录、爬取微博用户信息、用户评论、提取数据、建立数据表、数据成份分析、互粉推荐。待更新... 
 
-欢迎Fork!!!
+欢迎Fork ! 
 
+-------------------
+
+[TOC]
 
 ## 安装
 
-<pre>
+``` python
   git clone git@github.com:crazyacking/Spider--Java.git
   cd Spider--Java
-</pre>
+```
 默认编辑器是IntelliJ IDEA 14.1.4，Eclipse也能完美运行.
 ## API(如何使用)
 ### Creating a Spider
-<pre>
+``` python
   var spider = require('spider');
   var s = spider();
-</pre>
+```
 
 #### weibo-Spider(选项)
 
@@ -66,3 +73,11 @@
 The source code of Spider Queen is made available for study purposes only. Neither it, its source code, nor its byte code may be modified and recompiled for public use by anyone except us.
 
 We do accept and encourage private modifications with the intent for said modifications to be added to the official public version.
+
+
+## 反馈与建议
+- 微博：[@crazyacking](http://weibo.com/u/3736544454)，[@GGock](http://weibo.com/ggock "crazyacking")
+- 邮箱：<crazyacking@gmail.com>
+
+---------
+感谢阅读这份帮助文档。如果你有好的建议，欢迎反馈。
