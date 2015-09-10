@@ -4,7 +4,7 @@
 
 [![build](https://img.shields.io/codeship/d6c1ddd0-16a3-0132-5f85-2e35c05e22b1/master.svg)](https://github.com/crazyacking/Spider--Java/tree/master/src/cn/edu/hut/crazyacking/spider)
 [![module](https://img.shields.io/puppetforge/mc/camptocamp.svg)](https://github.com/crazyacking/Spider--Java/tree/master/src/cn/edu/hut/crazyacking/spider)
-[![license](https://img.shields.io/crates/l/rustc-serialize.svg)]()
+[![license](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/crazyacking/Spider--Java/tree/master/.idea)
 
 **zeekEye**是一款新浪微博爬虫，采用`Java`语言开发，基于`hetrix`爬虫架构,使用`HTTPClient4.0`和`Apache4.0`网络包.
 
