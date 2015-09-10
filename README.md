@@ -2,9 +2,9 @@
 ##-- Programmable spidering of web sites with Java
 
 
-[![网络爬虫](http://img.shields.io/travis/OpenExoplanetCatalogue/open_exoplanet_catalogue/master.svg?style=flat)](https://travis-ci.org/OpenExoplanetCatalogue/open_exoplanet_catalogue/)
+[![网络爬虫](http://img.shields.io/travis/OpenExoplanetCatalogue/open_exoplanet_catalogue/master.svg?style=flat)]()
 [![新浪微博](http://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
-[![数据分析](http://img.shields.io/badge/arXiv-1211.7121-orange.svg?style=flat)](http://arxiv.org/abs/1211.7121)
+[![数据分析](http://img.shields.io/badge/arXiv-1211.7121-orange.svg?style=flat)]()
 
 **zeekEye**是一款新浪微博爬虫，采用`Java`语言开发，基于`hetrix`爬虫架构,使用`HTTPClient4.0`和`Apache4.0`网络包.
 
