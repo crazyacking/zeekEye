@@ -23,7 +23,7 @@
 <li><a href="#programmable-spidering-of-web-sites-with-java">– Programmable spidering of web sites with Java</a></li>
 <li><a href="#安装">安装</a></li>
 <li><a href="#api如何使用">API(如何使用)</a><ul>
-<li><a href="#project config">Creating a Spider</a><ul>
+<li><a href="#project config">project config</a><ul>
 <li><a href="#weibo-spider选项">weibo-Spider(选项)</a></li>
 </ul>
 </li>
