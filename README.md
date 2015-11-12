@@ -23,7 +23,7 @@
 <li><a href="#programmable-spidering-of-web-sites-with-java">– Programmable spidering of web sites with Java</a></li>
 <li><a href="#安装">安装</a></li>
 <li><a href="#api如何使用">API(如何使用)</a><ul>
-<li><a href="#creating-a-spider">Creating a Spider</a><ul>
+<li><a href="#project config">Creating a Spider</a><ul>
 <li><a href="#weibo-spider选项">weibo-Spider(选项)</a></li>
 </ul>
 </li>
@@ -46,14 +46,15 @@
 
 ``` python
   git clone git@github.com:crazyacking/Spider--Java.git
-  cd Spider--Java
+  javac -cp /home/username/Documents/Spider--Java/src/cn/edu/hut/crazyacking/spider/Spider.jar  WeiboSpiderStarter.java
+  java -cp /home/username/Documents/Spider--Java/src/cn/edu/hut/crazyacking/spider/Spider.jar : WeiboSpiderStarter
+  ...
 ```
-默认编辑器是IntelliJ IDEA 14.1.4，Eclipse也能完美运行.
+默认编辑器是IntelliJ IDEA 14.1.4，开发环境为jdk1.7.0，编译执行前先用IntelliJ IDEA把项目源码导出成jar包.
 ## API(如何使用)
-### Creating a Spider
+### project config
 ``` python
-  var spider = require('spider');
-  var s = spider();
+  conf/spider.properties文件为整个项目相关参数的配置文件，包括数据库接口地址、并行线程、爬取数量上限的配置等.
 ```
 
 #### weibo-Spider(选项)
