@@ -20,9 +20,13 @@ import cn.edu.hut.crazyacking.spider.worker.impl.UrlWeiboWorker;
 import cn.edu.hut.crazyacking.spider.parser.WebDataExtraction;
 import cn.edu.hut.crazyacking.spider.storage.PageStorage;
 
-/**
- * Created by crazyacking on 2015/3/25.
- */
+/*
+* -----------------------------------------------------------------
+* Copyright (c) 2015 crazyacking All rights reserved.
+* -----------------------------------------------------------------
+*       Author: crazyacking
+*       Submission Date: 2015/3/25
+*/
 
 public class WeiboSpiderStarter {
     private static final Logger Log = Logger.getLogger(WeiboSpiderStarter.class.getName());
@@ -32,10 +36,10 @@ public class WeiboSpiderStarter {
     public static void main(String[] args) throws IOException, InterruptedException {
 
 
-        // ³õÊ¼»¯ÅäÖÃ²ÎÊı
+        // åˆå§‹åŒ–é…ç½®å‚æ•°
         initializeParams();
 
-        // ¸ù¾İtypeÅĞ¶ÏÅÀ³æÈÎÎñÀàĞÍ
+        // æ ¹æ®typeåˆ¤æ–­çˆ¬è™«ä»»åŠ¡ç±»å‹
         if (TYPE.equals("weibo")) {
             fetchWeibo();
         } else if (TYPE.equals("comment")) {
@@ -57,7 +61,7 @@ public class WeiboSpiderStarter {
     }
 
     /**
-     * ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡ÅäÖÃĞÅÏ¢£ºÊı¾İ¿âÁ¬½Ó¡¢Ïà¹ØÎÄ¼ş¸ùÄ¿Â¼¡¢ÅÀ³æÈÎÎñÀàĞÍ
+     * ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–é…ç½®ä¿¡æ¯ï¼šæ•°æ®åº“è¿æ¥ã€ç›¸å…³æ–‡ä»¶æ ¹ç›®å½•ã€çˆ¬è™«ä»»åŠ¡ç±»å‹
      */
     private static void initializeParams() {
         InputStream in;
@@ -66,13 +70,13 @@ public class WeiboSpiderStarter {
             Properties properties = new Properties();
             properties.load(in);
 
-            // ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ¿âÁ¬½Ó²ÎÊı
+            // ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–æ•°æ®åº“è¿æ¥å‚æ•°
             DBConn.CONN_URL = properties.getProperty("DB.connUrl");
             DBConn.DB_NAME = properties.getProperty("DB.name");
             DBConn.USERNAME = properties.getProperty("DB.username");
             DBConn.PASSWORD = properties.getProperty("DB.password");
 
-            // ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡¸ùÄ¿Â¼£¬²¢ÉèÖÃÏà¹ØÎÄ¼şµØÖ·
+            // ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–æ ¹ç›®å½•ï¼Œå¹¶è®¾ç½®ç›¸å…³æ–‡ä»¶åœ°å€
             Constants.ROOT_DISK = properties.getProperty("spider.rootDisk");
             Constants.REPOST_LOG_PATH = Constants.ROOT_DISK + "repost_log.txt";
             Constants.COMMENT_LOG_PATH = Constants.ROOT_DISK + "comment_log.txt";
@@ -84,16 +88,16 @@ public class WeiboSpiderStarter {
             Constants.ABNORMAL_WEIBO_PATH = Constants.ROOT_DISK + "abnormal_weibo.txt";
             Constants.ABNORMAL_WEIBO_CLEANED_PATH = Constants.ROOT_DISK + "abnormal_weibo_cleaned.txt";
 
-            // ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡ÅÀ³æÈÎÎñÀàĞÍ
+            // ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–çˆ¬è™«ä»»åŠ¡ç±»å‹
             WeiboSpiderStarter.TYPE = properties.getProperty("spider.type");
 
-            // ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡followÅÀÈ¡Ïà¹Ø²ÎÊı
+            // ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–followçˆ¬å–ç›¸å…³å‚æ•°
             if (TYPE.equals("follow")) {
                 Constants.LEVEL = Integer.parseInt(properties.getProperty("follow.level"));
                 Constants.FANS_NO_MORE_THAN = Integer.parseInt(properties.getProperty("follow.maxFansNum"));
             }
 
-            // ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡Î¢²©Ïà¹Ø²ÎÊı
+            // ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–å¾®åšç›¸å…³å‚æ•°
             Constants.CHECK_WEIBO_NUM = Boolean.parseBoolean(properties.getProperty("weibo.checkWeiboNum", "false"));
             if (Constants.CHECK_WEIBO_NUM) {
                 Constants.WEIBO_NO_MORE_THAN = Integer.parseInt(properties.getProperty("weibo.maxWeiboNum"));
@@ -108,21 +112,21 @@ public class WeiboSpiderStarter {
     }
 
     private static void fetchWeibo() {
-        Log.info("\n\n\n===========================================================\n\t\t»ùÓÚÍøÂçÅÀ³æµÄºÃÓÑÍÆ¼öÏµÍ³\n\t\t\t\t ----------------------zeekEye    \n===========================================================\n");
+        Log.info("\n\n\n===========================================================\n\t\tåŸºäºç½‘ç»œçˆ¬è™«çš„å¥½å‹æ¨èç³»ç»Ÿ\n\t\t\t\t ----------------------zeekEye    \n===========================================================\n");
 
-        // ³õÊ¼»¯ÕËºÅ¶ÓÁĞ
+        // åˆå§‹åŒ–è´¦å·é˜Ÿåˆ—
         /*
-        * °ÑÎÄ¼şÖĞµÄÕËºÅ¶ÁÈëµ½AccountQueueÖĞ
+        * æŠŠæ–‡ä»¶ä¸­çš„è´¦å·è¯»å…¥åˆ°AccountQueueä¸­
 		* */
         Utils.readAccountFromFile();
 
-        // ³õÊ¼»¯Î¢²©Ò³ÃæÁ´½Ó
+        // åˆå§‹åŒ–å¾®åšé¡µé¢é“¾æ¥
         /*
-        * ´ÓÊı¾İ¿âÖĞÈ¡³ö´ıÅÀÈ¡ÓÃ»§ID£¬¹¹Ôì³õÊ¼ÓÃ»§·ÛË¿Ò³ÃæµÄUrl£¬²¢·ÅÈë´ıÅÀÈ¡¶ÓÁĞWeiboUrlQueue
+        * ä»æ•°æ®åº“ä¸­å–å‡ºå¾…çˆ¬å–ç”¨æˆ·IDï¼Œæ„é€ åˆå§‹ç”¨æˆ·ç²‰ä¸é¡µé¢çš„Urlï¼Œå¹¶æ”¾å…¥å¾…çˆ¬å–é˜Ÿåˆ—WeiboUrlQueue
 		* */
         Utils.initializeWeiboUrl();
 
-        // Æô¶¯ÅÀ³æworkerÏß³Ì
+        // å¯åŠ¨çˆ¬è™«workerçº¿ç¨‹
         for (int i = 0; i < WORKER_NUM; i++) {
             new Thread(new UrlWeiboWorker()).start();
         }
@@ -130,13 +134,13 @@ public class WeiboSpiderStarter {
 
     private static void fetchAbnormalWeibo() {
         Log.info("\n\n\n===========================\n     Abnormal Weibo\n===========================\n");
-        // ³õÊ¼»¯ÕËºÅ¶ÓÁĞ
+        // åˆå§‹åŒ–è´¦å·é˜Ÿåˆ—
         Utils.readAccountFromFile();
 
-        // ³õÊ¼»¯Î¢²©Ò³ÃæÁ´½Ó
+        // åˆå§‹åŒ–å¾®åšé¡µé¢é“¾æ¥
         Utils.initializeAbnormalWeiboUrl();
 
-        // Æô¶¯ÅÀ³æworkerÏß³Ì
+        // å¯åŠ¨çˆ¬è™«workerçº¿ç¨‹
         for (int i = 0; i < WORKER_NUM; i++) {
             new Thread(new UrlAbnormalWeiboWorker()).start();
         }
@@ -144,13 +148,13 @@ public class WeiboSpiderStarter {
 
     private static void fetchComment() {
         Log.info("\n\n\n===========================\n     Fetch Comment\n===========================\n");
-        // ³õÊ¼»¯ÕËºÅ¶ÓÁĞ
+        // åˆå§‹åŒ–è´¦å·é˜Ÿåˆ—
         Utils.readAccountFromFile();
 
-        // ³õÊ¼»¯ÆÀÂÛÒ³ÃæÁ´½Ó
+        // åˆå§‹åŒ–è¯„è®ºé¡µé¢é“¾æ¥
         Utils.initializeCommentUrl();
 
-        // Æô¶¯ÅÀ³æworkerÏß³Ì
+        // å¯åŠ¨çˆ¬è™«workerçº¿ç¨‹
         for (int i = 0; i < WORKER_NUM; i++) {
             new Thread(new UrlCommentWorker()).start();
         }
@@ -158,13 +162,13 @@ public class WeiboSpiderStarter {
 
     private static void fetchRepost() {
         Log.info("\n\n\n===========================\n     Fetch Repost\n===========================\n");
-        // ³õÊ¼»¯ÕËºÅ¶ÓÁĞ
+        // åˆå§‹åŒ–è´¦å·é˜Ÿåˆ—
         Utils.readAccountFromFile();
 
-        // ³õÊ¼»¯×ª·¢Ò³ÃæÁ´½Ó
+        // åˆå§‹åŒ–è½¬å‘é¡µé¢é“¾æ¥
         Utils.initializeRepostUrl();
 
-        // Æô¶¯ÅÀ³æworkerÏß³Ì
+        // å¯åŠ¨çˆ¬è™«workerçº¿ç¨‹
         for (int i = 0; i < WORKER_NUM; i++) {
             new Thread(new UrlRepostWorker()).start();
         }
@@ -172,13 +176,13 @@ public class WeiboSpiderStarter {
 
     private static void fetchFollowee() {
         Log.info("\n\n\n===========================\n     Fetch Followee\n===========================\n");
-        // ³õÊ¼»¯ÕËºÅ¶ÓÁĞ
+        // åˆå§‹åŒ–è´¦å·é˜Ÿåˆ—
         Utils.readAccountFromFile();
 
-        // ³õÊ¼»¯¹Ø×¢Ò³ÃæÁ´½Ó
+        // åˆå§‹åŒ–å…³æ³¨é¡µé¢é“¾æ¥
         UrlFollowWorker.CURRENT_LEVEL = Utils.initializeFollowUrl();
 
-        // Æô¶¯ÅÀ³æworkerÏß³Ì
+        // å¯åŠ¨çˆ¬è™«workerçº¿ç¨‹
         for (int i = 0; i < WORKER_NUM; i++) {
             new Thread(new UrlFollowWorker()).start();
         }
