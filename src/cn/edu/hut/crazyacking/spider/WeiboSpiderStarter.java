@@ -35,7 +35,6 @@ public class WeiboSpiderStarter {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-
         // 初始化配置参数
         initializeParams();
 
