@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 
 import cn.edu.hut.crazyacking.spider.parser.bean.Comment;
 import cn.edu.hut.crazyacking.spider.utils.DBConn;
-import cn.edu.hut.crazyacking.spider.utils.Utils;
+import cn.edu.hut.crazyacking.spider.utils.Utils;;;
 
 public class CommentParser {	
 	private static final Logger Log = Logger.getLogger(CommentParser.class.getName());
