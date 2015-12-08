@@ -14,7 +14,7 @@ public class FollowUrlQueue {
 	public static final int MAX_SIZE = 10000;
 	
 	public synchronized static void addElement(String url){
-		followUrlQueue.add(url);;
+		followUrlQueue.add(url);
 	}
 	
 	public synchronized static void addFirstElement(String url){
