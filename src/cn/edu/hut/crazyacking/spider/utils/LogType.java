@@ -1,3 +1,4 @@
+// CopyRight (C) 2014 crazyacking All Right Reserved
 package cn.edu.hut.crazyacking.spider.utils;
 
 public class LogType {
