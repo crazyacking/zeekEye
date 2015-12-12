@@ -3,7 +3,7 @@ package cn.edu.hut.crazyacking.spider.parser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
