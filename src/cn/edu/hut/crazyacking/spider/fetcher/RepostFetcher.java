@@ -1,4 +1,4 @@
-package cn.edu.hut.crazyacking.spider.fetcher;
+package cn.edu.hut.crazyacking.spider.fetcher;;
 
 import java.util.List;
 
