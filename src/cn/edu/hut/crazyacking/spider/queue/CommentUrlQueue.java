@@ -1,6 +1,6 @@
 package cn.edu.hut.crazyacking.spider.queue;
 
-import java.util.LinkedList;
+import java.util.LinkedList;;
 
 /**
  * 未访问的url队列
