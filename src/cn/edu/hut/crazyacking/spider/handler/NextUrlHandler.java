@@ -1,5 +1,5 @@
 package cn.edu.hut.crazyacking.spider.handler;
-;;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
