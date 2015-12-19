@@ -9,7 +9,7 @@ import java.sql.Statement;
  * Created by crazyacking on 2015/7/3.
  */
 class FriendRecommend {
-  // to do something
+  // to do
 }
 
 
