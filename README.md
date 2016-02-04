@@ -61,8 +61,7 @@
 
 "选项"包含以下字段：
 * `maxSockets` - 线程池中最大并行线程数. 默认为 `4`.
-* `userAgent` - 发送到远程服务器的用户代理请求. 默认为 `Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.7 
-* `cache` -  缓存对象。默认为非缓存，具体看最新版本代码缓存对象的实现细节.
+* `userAgent` - 发送到远程服务器的用户代理请求. 默认为 `Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US)’
 * `pool` - 一个包含该请求代理的哈希线程池。如果省略，将使用全局设置的maxsockets.
 
 ### 添加路由处理程序
@@ -71,10 +70,6 @@
 其中参数如下 :
 
 * `hosts` - string类型 -- 或是一个数组类型 -- 目标主机的url.
-* `cb` - A function of the form `function(window, $)` where
-  * `this` - Will be a variable referencing the `Routes.match` return object/value with some other goodies added from spider.
-  * `window` - Will be a variable referencing the document's window.
-  * `$` - Will be the variable referencing the jQuery Object.
 
 ### 爬虫抓取url队列.
 
@@ -84,11 +79,11 @@
 
 目前更新缓存暂提供以下方法:
 
-* `get(url, cb)` - Returns `url`'s `body` field via the `cb` callback/continuation if it exists. Returns `null` otherwise.
-  * `cb` - Must be of the form `function(retval) {...}'
-* `getHeaders(url, cb)` - Returns `url`'s `headers` field via the `cb` callback/continuation if it exists. Returns `null` otherwise.
-  * `cb` - Must be of the form `function(retval) {...}`
-* `set(url, headers, body)` - Sets/Saves `url`'s `headers` and `body` in the cache.
+* `get(url, cb)` - 如果url已存在,通过 `cb` 回调函数返回 `url`'的`body`. 否则返回'null'.
+  * `cb` - 固定形式 `function(retval) {...}'
+* `getHeaders(url, cb)` - 如果url已经存在,返回`url`的 `headers`,否则返回`null`.
+  * `cb` - 固定格式 `function(retval) {...}`
+* `set(url, headers, body)` - 设置/保存 `url`的 `headers` 和 `body`.
 
 ### 设置冗余/日志级别
 `spider.log(level)` - 这儿的`level`是一个string，可以是`"debug"`, `"info"`, `"error"`
