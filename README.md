@@ -61,7 +61,7 @@
 
 "选项"包含以下字段：
 * `maxSockets` - 线程池中最大并行线程数. 默认为 `4`.
-* `userAgent` - 发送到远程服务器的用户代理请求. 默认为 `Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7` (firefox userAgent String).
+* `userAgent` - 发送到远程服务器的用户代理请求. 默认为 `Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-US) AppleWebKit/534.7 
 * `cache` -  缓存对象。默认为非缓存，具体看最新版本代码缓存对象的实现细节.
 * `pool` - 一个包含该请求代理的哈希线程池。如果省略，将使用全局设置的maxsockets.
 
@@ -70,10 +70,9 @@
 #### spider.route(主机，模式)
 其中参数如下 :
 
-* `hosts` - A string -- or an array of string -- representing the `host` part of the targeted URL(s).
-* `pattern` - The pattern against which spider tries to match the remaining (`pathname` + `search` + `hash`) of the URL(s).
+* `hosts` - string类型 -- 或是一个数组类型 -- 目标主机的url.
 * `cb` - A function of the form `function(window, $)` where
-  * `this` - Will be a variable referencing the `Routes.match` return object/value with some other goodies added from spider. For more info see http://www.cnblogs.com/crazyacking/category/686354.html
+  * `this` - Will be a variable referencing the `Routes.match` return object/value with some other goodies added from spider.
   * `window` - Will be a variable referencing the document's window.
   * `$` - Will be the variable referencing the jQuery Object.
 
@@ -92,7 +91,7 @@
 * `set(url, headers, body)` - Sets/Saves `url`'s `headers` and `body` in the cache.
 
 ### 设置冗余/日志级别
-`spider.log(level)` - Where `level` is a string that can be any of `"debug"`, `"info"`, `"error"`
+`spider.log(level)` - 这儿的`level`是一个string，可以是`"debug"`, `"info"`, `"error"`
 
 ###Source Code
 The source code of zeekEye is made available for study purposes only. Neither it, its source code, nor its byte code may be modified and recompiled for public use by anyone except us.
