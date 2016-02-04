@@ -26,11 +26,6 @@
 <li><a href="#project config">project config</a><ul>
 <li><a href="#weibo-spider选项">weibo-Spider(选项)</a></li>
 </ul>
-</li>
-<li><a href="#添加路由处理程序">添加路由处理程序</a><ul>
-<li><a href="#spiderroute主机模式">spider.route(主机，模式)</a></li>
-</ul>
-</li>
 <li><a href="#爬虫抓取url队列">爬虫抓取url队列.</a></li>
 <li><a href="#拓展-更新缓存">拓展 / 更新缓存</a></li>
 <li><a href="#设置冗余日志级别">设置冗余/日志级别</a></li>
