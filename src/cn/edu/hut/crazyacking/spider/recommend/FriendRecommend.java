@@ -9,5 +9,5 @@ import java.sql.Statement;
  * Created by crazyacking on 2015/7/3.
  */
 class FriendRecommend {
-  // to do something
+  // 好友推荐，待更新。。。
 }
