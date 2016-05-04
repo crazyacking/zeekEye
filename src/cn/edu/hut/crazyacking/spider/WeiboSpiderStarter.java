@@ -17,7 +17,6 @@ import cn.edu.hut.crazyacking.spider.worker.impl.UrlCommentWorker;
 import cn.edu.hut.crazyacking.spider.worker.impl.UrlFollowWorker;
 import cn.edu.hut.crazyacking.spider.worker.impl.UrlRepostWorker;
 import cn.edu.hut.crazyacking.spider.worker.impl.UrlWeiboWorker;
-import cn.edu.hut.crazyacking.spider.parser.WebDataExtraction;
 import cn.edu.hut.crazyacking.spider.storage.PageStorage;
 
 /*

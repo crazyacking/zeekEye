@@ -27,7 +27,6 @@ public class CommentFetcher {
     private static final Logger Log = Logger.getLogger(CommentFetcher.class.getName());
 
     /**
-     * ¸ù¾İurlÅÀÈ¡ÍøÒ³ÄÚÈİ
      * @param url
      * @return
      */
@@ -35,23 +34,20 @@ public class CommentFetcher {
         String content = null;
         Document contentDoc = null;
 
-        // ÉèÖÃGET³¬Ê±Ê±¼ä
         HttpParams params = new BasicHttpParams();
         HttpConnectionParams.setConnectionTimeout(params, 10 * 1000);
         HttpConnectionParams.setSoTimeout(params, 10 * 1000);
         AbstractHttpClient httpClient = new DefaultHttpClient(params);
         HttpGet getHttp = new HttpGet(url);
-        // ÉèÖÃHTTP Header
         getHttp.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
         HttpResponse response;
 
         try{
-            // »ñµÃĞÅÏ¢ÔØÌå
             response = httpClient.execute(getHttp);
             HttpEntity entity = response.getEntity();
 
             if(entity != null){
-                // ×ª»¯ÎªÎÄ±¾ĞÅÏ¢, ÉèÖÃÅÀÈ¡ÍøÒ³µÄ×Ö·û¼¯£¬·ÀÖ¹ÂÒÂë
+                // ×ªï¿½ï¿½Îªï¿½Ä±ï¿½ï¿½ï¿½Ï¢, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
                 content = EntityUtils.toString(entity, "UTF-8");
 
                 String returnMsg = Utils.checkContent(content, url, FetcherType.COMMENT);
@@ -59,9 +55,9 @@ public class CommentFetcher {
                     return new Page(returnMsg, null);
                 }
 
-                // ½«content×Ö·û´®×ª»»³ÉDocument¶ÔÏó
+                // ï¿½ï¿½contentï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Documentï¿½ï¿½ï¿½ï¿½
                 contentDoc = CommentParser.getPageDocument(content);
-                // È¡»ØÕâ¸öÒ³ÃæËùÓĞµÄÆÀÂÛ
+                // È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
                 List<Element> commentItems = CommentParser.getGoalContent(contentDoc);
                 if(commentItems != null && commentItems.size() > 0){
                     CommentParser.createFile(commentItems, url);
@@ -71,7 +67,7 @@ public class CommentFetcher {
         catch(Exception e){
             Log.error(e);
 
-            // ´¦Àí³¬Ê±£¬ºÍÇëÇóÃ¦ÏàÍ¬
+            // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¦ï¿½ï¿½Í¬
             url = url.split("&gsid")[0];
             Log.info(">> Put back url: " + url);
             CommentUrlQueue.addFirstElement(url);
