@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/zeekEye.iml" filepath="$PROJECT_DIR$/zeekEye.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZeekEye.iml" filepath="$PROJECT_DIR$/ZeekEye.iml" />
     </modules>
   </component>
 </project>
