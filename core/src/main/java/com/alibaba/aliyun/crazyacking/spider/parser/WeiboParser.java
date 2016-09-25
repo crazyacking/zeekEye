@@ -4,11 +4,12 @@ import com.alibaba.aliyun.crazyacking.spider.parser.bean.Weibo;
 import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
 import com.alibaba.aliyun.crazyacking.spider.utils.DBConnector;
 import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeiboParser {
+    public static final Connection conn = DBConnector.getConnection();
     private static final int BACK_NODES_NUM_IN_REPOST_DIV = 9;
     private static final Logger logger = LoggerFactory.getLogger(WeiboParser.class.getName());
-    public static final Connection conn = DBConnector.getConnection();
 
     public static Document getPageDocument(String content) {
         return Jsoup.parse(content);
