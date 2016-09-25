@@ -2,102 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bffc1e1b-75ae-4e7c-bc20-c20ceecad563" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/core_war.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/core_war_exploded.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_9.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_8_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_21.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_3_2_16_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/api.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/core.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/java/com/alibaba/aliyun/crazyacking/spider/utils/Initializer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/main/resources/utils-beans.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/sina_weibo.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/apache-mime4j-0.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-codec-1.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-logging-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpclient-4.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpcore-4.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpmime-4.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/json.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jsoup-1.7.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/log4j-1.2.17.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/mysql-connector-java-5.1.10-bin.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/sqljdbc4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/log/log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/WeiboSpiderStarter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/fetcher/CommentFetcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/fetcher/FolloweeFetcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/fetcher/RepostFetcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/fetcher/WeiboFetcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/handler/ManualRedirectHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/handler/NextUrlHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/CommentParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/FollowParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/RepostParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/WebDataExtraction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/WeiboParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/bean/Account.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/bean/Comment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/bean/Follow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/bean/Page.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/bean/Repost.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/parser/bean/Weibo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/AbnormalAccountUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/AccountQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/CommentUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/FollowUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/RepostUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/VisitedCommentUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/VisitedFollowUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/VisitedRepostUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/VisitedWeiboUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/queue/WeiboUrlQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/recommend/FriendRecommend.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/storage/PageStorage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/utils/Constants.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/utils/DBConn.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/utils/FetcherType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/utils/LogType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/utils/Utils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/BasicWorker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/LoginWeibo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/LoginWeiboBackup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/impl/UrlAbnormalWeiboWorker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/impl/UrlCommentWorker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/impl/UrlFollowWorker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/impl/UrlRepostWorker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cn/edu/hut/crazyacking/spider/worker/impl/UrlWeiboWorker.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <list id="55fe74ed-f4d4-4dfb-ba66-9a04455bb07a" name="Failed commit: Default" comment="更新项目组织结构">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ZeekEye.iml" afterPath="$PROJECT_DIR$/ZeekEye.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/spider.properties" afterPath="$PROJECT_DIR$/conf/spider.properties" />
     </list>
     <ignored path="zeekEye.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1424,16 +1332,16 @@
       <workItem from="1462191993360" duration="928000" />
       <workItem from="1474733204921" duration="219000" />
       <workItem from="1474773886001" duration="274000" />
-      <workItem from="1474775996933" duration="8148000" />
+      <workItem from="1474775996933" duration="8384000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9569000" />
+    <option name="totallyTimeSpent" value="9805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1456,7 +1364,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21775083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21775083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1478,6 +1386,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="更新项目组织结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新项目组织结构" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
