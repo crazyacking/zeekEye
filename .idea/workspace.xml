@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bffc1e1b-75ae-4e7c-bc20-c20ceecad563" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ZeekEye.iml" afterPath="$PROJECT_DIR$/ZeekEye.iml" />
     </list>
     <ignored path="zeekEye.iws" />
@@ -527,12 +525,12 @@
       <updated>1462191980997</updated>
       <workItem from="1462191993360" duration="928000" />
       <workItem from="1474733204921" duration="219000" />
-      <workItem from="1474773886001" duration="58000" />
+      <workItem from="1474773886001" duration="274000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1205000" />
+    <option name="totallyTimeSpent" value="1421000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
