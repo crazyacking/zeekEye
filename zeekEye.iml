@@ -8,9 +8,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-<<<<<<< HEAD
     <orderEntry type="library" exported="" name="apache-mime4j--0.6" level="project" />
-=======
->>>>>>> dev_crazyacking
   </component>
 </module>
