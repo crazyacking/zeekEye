@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepostParser {
-    private static final Logger logger = LoggerFactory.getLogger(RepostParser.class.getName());
     public static final Connection conn = DBConnector.getConnection();
+    private static final Logger logger = LoggerFactory.getLogger(RepostParser.class.getName());
 
     public static Document getPageDocument(String content) {
         return Jsoup.parse(content);

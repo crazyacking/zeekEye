@@ -114,12 +114,11 @@ public class Initializer {
                 logger.error(e1.toString());
             }
         } finally {
-			try {
-				conn.close();
-			}
-			catch (SQLException e) {
-				logger.error(e.toString());
-			}
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                logger.error(e.toString());
+            }
         }
     }
 

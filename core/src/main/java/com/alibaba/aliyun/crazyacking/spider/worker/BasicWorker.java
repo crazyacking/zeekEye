@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Date;
 
 public abstract class BasicWorker {
     private static final Logger logger = LoggerFactory.getLogger(BasicWorker.class.getName());
@@ -41,18 +40,16 @@ public abstract class BasicWorker {
         }
         // 系统繁忙
         else if (result.equals(Constants.SYSTEM_BUSY)) {
-            System.out.println("系统繁忙，请5秒后再试...");
-            logger.info(">> System busy, retry after 5s...");
+            logger.info("server busy, retry after 5s...");
             Thread.sleep(5 * 1000);
         }
         // 账号被冻结，切换账号继续执行
         else if (result.equals(Constants.ACCOUNT_FORBIDDEN)) {
-            System.out.println(">> " + (new Date()).toString() + ": " + username + " 账号被冻结！");
-            logger.info(">> " + (new Date()).toString() + ": " + username + " account has been frozen!");
+            logger.info("Account has been frozen: {}", username);
             // 切换账号
             gsid = switchAccount();
             while (gsid == null) {
-                // 队列中的所有账号当前均不可用，停顿5分钟，再试
+                // 队列中的所有账号当前均不可用，停顿5分钟再试
                 Thread.sleep(5 * 60 * 1000);
                 gsid = switchAccount();
             }
@@ -68,12 +65,12 @@ public abstract class BasicWorker {
         }
         // 系统繁忙
         else if (result.equals(Constants.SYSTEM_BUSY)) {
-            logger.info(">> System busy, retry after 5s...");
+            logger.info("server busy, retry after 5s...");
             Thread.sleep(5 * 1000);
         }
         // 账号被冻结，切换账号继续执行
         else if (result.equals(Constants.ACCOUNT_FORBIDDEN)) {
-            logger.info(">> " + (new Date()).toString() + ": " + username + " account has been frozen!");
+            logger.info("Account has been frozen: {}", username);
             // 切换账号
             cookie = switchAccountForCookie();
             while (cookie == null) {

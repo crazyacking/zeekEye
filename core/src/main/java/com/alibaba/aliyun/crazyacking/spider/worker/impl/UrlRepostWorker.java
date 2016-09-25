@@ -6,12 +6,13 @@ import com.alibaba.aliyun.crazyacking.spider.parser.RepostParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.RepostUrlQueue;
+import com.alibaba.aliyun.crazyacking.spider.utils.Initializer;
 import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import com.alibaba.aliyun.crazyacking.spider.worker.BasicWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import javax.annotation.Resource;
 import java.sql.SQLException;
 
 /**
@@ -21,6 +22,8 @@ import java.sql.SQLException;
  */
 public class UrlRepostWorker extends BasicWorker implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(UrlRepostWorker.class.getName());
+    @Resource(name = "initializer")
+    Initializer initializer;
 
     /**
      * 下载对应页面并分析出页面对应URL，放置在未访问队列中
@@ -64,7 +67,7 @@ public class UrlRepostWorker extends BasicWorker implements Runnable {
                         // 仍为空，从数据库中取
                         if (RepostUrlQueue.isEmpty()) {
                             logger.info(">> Add new repost Url...");
-                            Utils.initializeRepostUrl();
+                            initializer.initializeRepostUrl();
 
                             // 拿完还是空，退出爬虫
                             if (RepostUrlQueue.isEmpty()) {
@@ -75,11 +78,9 @@ public class UrlRepostWorker extends BasicWorker implements Runnable {
                     }
                 }
             } else {
-                logger.info(">> " + username + " login failed!");
+                logger.info(username + " login failed!");
             }
         } catch (InterruptedException e) {
-            logger.error(e.toString());
-        } catch (IOException e) {
             logger.error(e.toString());
         }
 

@@ -1,9 +1,10 @@
 package com.alibaba.aliyun.crazyacking.spider.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 
 public class DBConnector {
     private static final Logger logger = LoggerFactory.getLogger(DBConnector.class.getName());
@@ -21,7 +22,6 @@ public class DBConnector {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String DBUrl = "jdbc:sqlserver://127.0.0.1:1433;databaseName=" + DB_NAME + ";user=" + USERNAME + ";password=" + PASSWORD;
-//            System.out.println(DBUrl);
             conn = DriverManager.getConnection(DBUrl);
         } catch (Exception e) {
             logger.error(e.toString());

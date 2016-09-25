@@ -32,7 +32,6 @@ public class WeiboFetcher {
      * @return
      */
     public static Page getContentFromUrl(String url) {
-        System.out.println("getContentFromUrl = " + url);
         String content = null;
         Document contentDoc = null;
 
