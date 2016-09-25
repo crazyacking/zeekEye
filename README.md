@@ -41,8 +41,8 @@
 
 ## 安装
 
-``` python
-  git clone git@github.com:crazyacking/Spider--Java.git
+``` bash
+  git clone https://github.com/crazyacking/zeekEye.git
   javac -cp /home/username/Documents/Spider--Java/src/cn/edu/hut/crazyacking/spider/Spider.jar  WeiboSpiderStarter.java
   java -cp /home/username/Documents/Spider--Java/src/cn/edu/hut/crazyacking/spider/Spider.jar : WeiboSpiderStarter
   ...
