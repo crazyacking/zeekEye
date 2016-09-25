@@ -36,7 +36,7 @@ public class UrlWeiboWorker extends BasicWorker implements Runnable {
     @Override
     public void run() {
         // 首先获取账号并登录
-        System.out.println("启动爬虫线程...");
+        logger.info("启动爬虫线程...");
         //获取一个登录账号
         Account account = AccountQueue.outElement();
         AccountQueue.addElement(account);
@@ -51,36 +51,36 @@ public class UrlWeiboWorker extends BasicWorker implements Runnable {
             // 若登录失败，则执行一轮切换账户的操作，如果还失败，则退出
             if (gsid == null) {
                 gsid = switchAccount();
-                System.out.println("微博登录失败，正在切换账号...");
+                logger.info("微博登录失败，正在切换账号...");
                 Thread.sleep(1000);
             }
 
             // 登录成功
             if (gsid != null) {
-                System.out.println("微博登录成功，开始获取gsid码...");
+                logger.info("微博登录成功，开始获取gsid码...");
                 Thread.sleep(1000);
                 // 当URL队列不为空时，从未访问队列中取出url进行分析
                 while (!WeiboUrlQueue.isEmpty()) {
                     // 从队列中获取URL并处理
                     result = dataHandler(WeiboUrlQueue.outElement() + "&" + gsid);
-                    System.out.println("System " + result + ".");
+                    logger.info("System " + result + ".");
 
                     // 针对处理结果进行处理：OK, SYSTEM_BUSY, ACCOUNT_FORBIDDEN
                     gsid = process(result, gsid);
 
-                    System.out.println(gsid);
+                    logger.info(gsid);
 
                     // 没有新的URL了，从数据库中继续拿一个
                     if (WeiboUrlQueue.isEmpty()) {
                         // 仍为空，从数据库中取
                         if (WeiboUrlQueue.isEmpty()) {
-                            System.out.println(">> Add new weibo Url...");
+                            logger.info(">> Add new weibo Url...");
                             logger.info(">> Add new weibo Url...");
                             initializer.initializeWeiboUrl();
 
                             // 拿完还是空，退出爬虫
                             if (WeiboUrlQueue.isEmpty()) {
-                                System.out.println(">> All users have been fetched...");
+                                logger.info(">> All users have been fetched...");
                                 logger.info(">> All users have been fetched...");
                                 break;
                             }
@@ -88,22 +88,20 @@ public class UrlWeiboWorker extends BasicWorker implements Runnable {
                     }
                 }
             } else {
-                System.out.println(">> " + username + " login failed!");
-                logger.info(">> " + username + " login failed!");
+                logger.info(username + " login failed!");
+                logger.info(username + " login failed!");
             }
 
         } catch (Exception e) {
             logger.error(e.toString());
         }
-
-        // 关闭数据库连接
         try {
             WeiboParser.conn.close();
             Utils.conn.close();
         } catch (SQLException e) {
             logger.error(e.toString());
         }
-        System.out.println("Spider stop...");
+        logger.info("Spider stop...");
         logger.info("Spider stop...");
     }
 

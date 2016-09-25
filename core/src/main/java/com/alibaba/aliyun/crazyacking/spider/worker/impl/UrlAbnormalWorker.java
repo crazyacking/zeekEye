@@ -71,7 +71,7 @@ public class UrlAbnormalWorker extends BasicWorker implements Runnable {
                     }
                 }
             } else {
-                logger.info(">> " + username + " login failed!");
+                logger.info(username + " login failed!");
             }
 
         } catch (Exception e) {

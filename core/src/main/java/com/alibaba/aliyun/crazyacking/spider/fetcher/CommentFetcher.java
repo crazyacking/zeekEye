@@ -46,7 +46,6 @@ public class CommentFetcher {
             HttpEntity entity = response.getEntity();
 
             if (entity != null) {
-                // ת��Ϊ�ı���Ϣ, ������ȡ��ҳ���ַ�������ֹ����
                 content = EntityUtils.toString(entity, "UTF-8");
 
                 String returnMsg = Utils.checkContent(content, url, FetcherType.COMMENT);
@@ -54,9 +53,8 @@ public class CommentFetcher {
                     return new Page(returnMsg, null);
                 }
 
-                // ��content�ַ���ת����Document����
                 contentDoc = CommentParser.getPageDocument(content);
-                // ȡ�����ҳ�����е�����
+
                 List<Element> commentItems = CommentParser.getGoalContent(contentDoc);
                 if (commentItems != null && commentItems.size() > 0) {
                     CommentParser.createFile(commentItems, url);
@@ -64,8 +62,6 @@ public class CommentFetcher {
             }
         } catch (Exception e) {
             logger.error(e.toString());
-
-            // ����ʱ��������æ��ͬ
             url = url.split("&gsid")[0];
             logger.info(">> Put back url: " + url);
             CommentUrlQueue.addFirstElement(url);

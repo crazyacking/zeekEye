@@ -1,48 +1,52 @@
 package com.alibaba.aliyun.crazyacking.spider.parser;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.sql.Connection;
 
 /**
  * Created by crazyacking on 2015/7/1.
  */
 class WebDataExtraction {
+    private static final Logger logger = LoggerFactory.getLogger(WebDataExtraction.class);
 
     public void BeginWebDataExtraction(String contentString) throws InterruptedException {
-        System.out.println("正在从网页提取数据文件...");
         Thread.sleep(500);
+
         String regCharSet = "[\\u4e00-\\u9fa5]+.*";
-        Pattern p = Pattern.compile(regCharSet);
-        Matcher m = p.matcher(contentString);
-        String nickName = "Unknown";
-        String realName = "Unknown";
-        String userLocation = "Unknown";
-        String userSex = "Unknown";
-        String userBirthday = "Unknown";
-        String userBlogs = "Unknown";
-        String userBriefIntroduction = "Unknown";
-        String RegistrationTime = "Unknown";
-        String MicroBlogLevel = "Unknown";
-        String CreditScore = "Unknown";
-        String CreditRating = "Unknown";
-        String EmpiricalValue = "Unknown";
+        Pattern pattern = Pattern.compile(regCharSet);
+        Matcher matcher = pattern.matcher(contentString);
         String uid;
+        String userSex = null;
+        String nickName = null;
+        String realName = null;
+        String userBlogs = null;
+        String creditScore = null;
+        String userLocation = null;
+        String userBirthday = null;
+        String creditRating = null;
+        String empiricalValue = null;
+        String microBlogLevel = null;
+        String userIntroduction = null;
+        String registrationTime = null;
+
         int uidSta = contentString.indexOf("oid");
         int uidStaLen = 0;
         for (int i = uidSta + 7; contentString.charAt(i) != '\''; ++i) {
             uidStaLen++;
         }
         uid = contentString.substring(uidSta + 7, uidSta + 7 + uidStaLen);
-        System.out.println("uid = " + uid);
 
         int len1 = 0, len2 = 0, len3 = 0, len4 = 0, len5 = 0, len6 = 0, len7 = 0, len8 = 0, len9 = 0, len10 = 0, len11 = 0, len12 = 0;
-        while (m.find()) {
-            String groupString = m.group();
+        while (matcher.find()) {
+            String groupString = matcher.group();
 
             if (groupString.contains("昵称：")) {
                 int subStringStartPos = groupString.indexOf("昵称：") + 49;
@@ -102,7 +106,7 @@ class WebDataExtraction {
                 for (int i = subStringStartPos; groupString.charAt(i) != '&'; ++i) {
                     len7++;
                 }
-                userBriefIntroduction = groupString.substring(subStringStartPos, subStringStartPos + len7);
+                userIntroduction = groupString.substring(subStringStartPos, subStringStartPos + len7);
             }
 
 
@@ -111,7 +115,7 @@ class WebDataExtraction {
                 for (int i = subStringStartPos; groupString.charAt(i) != '\\'; ++i) {
                     len8++;
                 }
-                RegistrationTime = groupString.substring(subStringStartPos, subStringStartPos + len8);
+                registrationTime = groupString.substring(subStringStartPos, subStringStartPos + len8);
             }
 
 
@@ -120,7 +124,7 @@ class WebDataExtraction {
                 for (int i = subStringStartPos; groupString.charAt(i) != '&'; ++i) {
                     len9++;
                 }
-                MicroBlogLevel = groupString.substring(subStringStartPos, subStringStartPos + len9);
+                microBlogLevel = groupString.substring(subStringStartPos, subStringStartPos + len9);
             }
 
 
@@ -129,7 +133,7 @@ class WebDataExtraction {
                 for (int i = subStringStartPos; groupString.charAt(i) != '&'; ++i) {
                     len10++;
                 }
-                CreditScore = groupString.substring(subStringStartPos, subStringStartPos + len10);
+                creditScore = groupString.substring(subStringStartPos, subStringStartPos + len10);
             }
 
 
@@ -138,7 +142,7 @@ class WebDataExtraction {
                 for (int i = subStringStartPos; groupString.charAt(i) != '&'; ++i) {
                     len11++;
                 }
-                CreditRating = groupString.substring(subStringStartPos, subStringStartPos + len11);
+                creditRating = groupString.substring(subStringStartPos, subStringStartPos + len11);
             }
 
 
@@ -147,25 +151,10 @@ class WebDataExtraction {
                 for (int i = subStringStartPos; groupString.charAt(i) != '&'; ++i) {
                     len12++;
                 }
-                EmpiricalValue = groupString.substring(subStringStartPos, subStringStartPos + len12);
+                empiricalValue = groupString.substring(subStringStartPos, subStringStartPos + len12);
             }
         }
-        System.out.println("=====================================================================");
-        System.out.println("昵称：" + nickName);
-        System.out.println("微博ID：" + uid);
-        System.out.println("真实姓名：" + realName);
-        System.out.println("所在地：" + userLocation);
-        System.out.println("性别：" + userSex);
-        System.out.println("生日：" + userBirthday);
-        System.out.println("博客：" + userBlogs);
-        System.out.println("简介：" + userBriefIntroduction);
-        System.out.println("注册时间：" + RegistrationTime);
-        System.out.println("微博等级：" + MicroBlogLevel);
-        System.out.println("信用积分：" + CreditScore);
-        System.out.println("信用等级：" + CreditRating);
-        System.out.println("经验值：" + EmpiricalValue);
 
-        System.out.println("正在导入数据到数据库...");
         String connectionUrl = "jdbc:sqlserver://localhost:1433;" + "databaseName=sina_weibo;integratedSecurity=true;";
         String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=sina_weibo;user=crazyacking;password=jiangshanbiao.";//sa身份连接
         String url2 = "jdbc:sqlserver://127.0.0.1:1433;databaseName=sina_weibo;integratedSecurity=true;";//windows集成模式连接
@@ -177,21 +166,20 @@ class WebDataExtraction {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(url);
             Thread.sleep(500);
-            System.out.println("成功导入数据库！");
 
             // Create and execute an SQL statement that returns some data.
-
-
-            System.out.println("uid= " + uid);
-            String SQL = "INSERT INTO USER_INFO_BASE_TABLE\n" + "VALUES(" + "\'" + nickName + "\'" + ',' + "\'" + uid + "\'" + ',' + "\'" + realName + "\'" + ',' + "\'" + userLocation + "\'" + ',' + "\'" + userSex + "\'" + ',' + "\'" + userBirthday + "\'" + ',' + "\'" + userBlogs + "\'" + ',' + "\'" + userBriefIntroduction + "\'" + ',' + "\'" + RegistrationTime + "\'" + ',' + "\'" + MicroBlogLevel + "\'" + ',' + "\'" + CreditScore + "\'" + ',' + "\'" + CreditRating + "\'" + ',' + "\'" + EmpiricalValue + "\'" + ")";
-            System.out.println(SQL);
-            System.out.println("SQL语句成功执行！");
+            String SQL = "INSERT INTO USER_INFO_BASE_TABLE\n"
+                    + "VALUES(" + "\'" + nickName + "\'" + ',' + "\'" + uid
+                    + "\'" + ',' + "\'" + realName + "\'" + ',' + "\'" + userLocation
+                    + "\'" + ',' + "\'" + userSex + "\'" + ',' + "\'" + userBirthday + "\'" + ',' + "\'"
+                    + userBlogs + "\'" + ',' + "\'" + userIntroduction + "\'" + ',' + "\'" + registrationTime
+                    + "\'" + ',' + "\'" + microBlogLevel + "\'" + ',' + "\'" + creditScore + "\'" + ',' + "\'"
+                    + creditRating + "\'" + ',' + "\'" + empiricalValue + "\'" + ")";
             stmt = con.createStatement();
             int Result = stmt.executeUpdate(SQL);
 
-//             Iterate through the data in the result set and display it.
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         } finally {
             if (rs != null)
                 try {
