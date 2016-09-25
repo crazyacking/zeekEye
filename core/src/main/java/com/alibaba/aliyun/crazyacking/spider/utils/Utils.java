@@ -17,8 +17,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Utils {
-    private static final Logger logger = LoggerFactory.getLogger(Utils.class.getName());
     public static final Connection conn = DBConnector.getConnection();
+    private static final Logger logger = LoggerFactory.getLogger(Utils.class.getName());
     private static final SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
     /**

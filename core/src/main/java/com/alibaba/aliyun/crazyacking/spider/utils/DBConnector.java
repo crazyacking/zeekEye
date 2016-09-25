@@ -1,9 +1,10 @@
 package com.alibaba.aliyun.crazyacking.spider.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 
 public class DBConnector {
     private static final Logger logger = LoggerFactory.getLogger(DBConnector.class.getName());
