@@ -5,6 +5,6 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <bean name="initializer" class="com.alibaba.aliyun.crazyacking.spider.utils.Initializer"/>
-
+    <bean name="fetcher" class="com.alibaba.aliyun.crazyacking.spider.fetcher.CommentFetcher"/>
 
 </beans>

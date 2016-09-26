@@ -23,6 +23,9 @@ import java.sql.SQLException;
 public class UrlCommentWorker extends BasicWorker implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(UrlCommentWorker.class.getName());
 
+    @Resource(name = "fetcher")
+    CommentFetcher fetcher;
+
     @Resource(name = "initializer")
     Initializer initializer;
 
@@ -32,7 +35,7 @@ public class UrlCommentWorker extends BasicWorker implements Runnable {
      * @param url 返回值：被封账号/系统繁忙/OK
      */
     protected String dataHandler(String url) {
-        return NextUrlHandler.addNextCommentUrl(CommentFetcher.getContentFromUrl(url));
+        return NextUrlHandler.addNextCommentUrl(fetcher.getContentFromUrl(url));
     }
 
     @Override

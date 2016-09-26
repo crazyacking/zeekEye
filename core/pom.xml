@@ -55,6 +55,12 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.external</groupId>
+            <artifactId>sourceforge.spring.mock</artifactId>
+            <version>2.5.5</version>
+            <scope>test</scope>
+        </dependency>
         <!-- spring -->
 
     </dependencies>
@@ -66,8 +72,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>

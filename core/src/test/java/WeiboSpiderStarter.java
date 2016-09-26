@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Resource;
 
 /*
-* Copyright (c) 2015 crazyacking All rights reserved.
+* Copyright (c) 2016 crazyacking All rights reserved.
 * Author: crazyacking
-* Created Date: 2015/3/25
+* Created Date: 2016/3/25
 */
 
 public class WeiboSpiderStarter {

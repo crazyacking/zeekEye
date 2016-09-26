@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.Properties;
 
 /**
- * Created by crazyacking on 2015/7/3.
+ * Created by crazyacking on 2016/7/3.
  */
 public class Initializer {
 
@@ -24,7 +24,7 @@ public class Initializer {
      */
     public static synchronized void initializeWeiboUrl() {
         String querySql = "SELECT accountID FROM INIT_USER WHERE isFetched = 0";
-//		Connection conn = DBConnector.getConnection();
+        Connection conn = DBConnector.getConnection();
         PreparedStatement ps;
         Statement st;
         ResultSet rs;

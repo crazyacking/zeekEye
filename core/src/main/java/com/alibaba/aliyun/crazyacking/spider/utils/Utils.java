@@ -213,9 +213,9 @@ public class Utils {
     public static String checkContent(String content, String url, int fetcherType) throws IOException {
         String returnMsg = null;
         // 检测当前访问的用户是否为异常账号
-        if (content.contains("<div class=\"me\">抱歉，您当前访问的用户状态异常，暂时无法访问。</div>")
-                || content.contains("<div class=\"me\">用户不存在哦!</div>")
-                || content.contains("<div class=\"me\">请求页不存在")) {
+        if (content.contains("用户不存在哦!")
+                || content.contains("请求页不存在")
+                || content.contains("您当前访问的用户状态异常，暂时无法访问")) {
 
             AbnormalAccountUrlQueue.addElement(url);
 

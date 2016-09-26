@@ -7,7 +7,6 @@ public class Page {
     private Document contentDoc;
 
     public Page() {
-
     }
 
     public Page(String content, Document contentDoc) {
