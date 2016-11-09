@@ -1,11 +1,11 @@
 package com.alibaba.aliyun.crazyacking.spider.fetcher;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
 import com.alibaba.aliyun.crazyacking.spider.parser.FollowParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Page;
 import com.alibaba.aliyun.crazyacking.spider.queue.FollowUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.VisitedFollowUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.CookieStore;
@@ -79,9 +79,11 @@ public class FolloweeFetcher {
                 }
             }
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
 
-            // 处理超时，和请求忙相同
+            /*
+            处理超时，和请求忙相同
+             */
             logger.info(">> Put back url: " + url);
             FollowUrlQueue.addFirstElement(url);
             return new Page(Constants.SYSTEM_BUSY, null);

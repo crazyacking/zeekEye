@@ -1,13 +1,13 @@
 package com.alibaba.aliyun.crazyacking.spider.worker.impl;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Initializer;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.fetcher.FolloweeFetcher;
 import com.alibaba.aliyun.crazyacking.spider.handler.NextUrlHandler;
 import com.alibaba.aliyun.crazyacking.spider.parser.FollowParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.FollowUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Initializer;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import com.alibaba.aliyun.crazyacking.spider.worker.BasicWorker;
 import org.apache.http.client.CookieStore;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class UrlFollowWorker extends BasicWorker implements Runnable {
         // 首先获取账号并登录
         Account account = AccountQueue.outElement();
         AccountQueue.addElement(account);
-        this.username = account.getUsername();
+        this.username = account.getUserName();
         this.password = account.getPassword();
 
         // 使用账号登录
@@ -67,7 +67,7 @@ public class UrlFollowWorker extends BasicWorker implements Runnable {
 //					// 添加该层的follower id列表URL
 //					if(currentLevel == 0){
 //						// 如果是第0层：从文件中初始化
-//						Utils.initializeFollowUrl();
+//						Utils.initFollowUrl();
 //					}
 //					else {
 //						// 如果其他层次：从数据库中获取上一层次的所有关注者ID，【做一下unique】
@@ -111,7 +111,7 @@ public class UrlFollowWorker extends BasicWorker implements Runnable {
                         // 仍为空，从数据库中取
                         if (FollowUrlQueue.isEmpty()) {
                             logger.info(">> Add new follow Url...");
-                            CURRENT_LEVEL = initializer.initializeFollowUrl();
+                            CURRENT_LEVEL = initializer.initFollowUrl();
 
                             // 拿完还是空，退出爬虫
                             if (FollowUrlQueue.isEmpty()) {
@@ -127,7 +127,7 @@ public class UrlFollowWorker extends BasicWorker implements Runnable {
                 logger.info(username + " login failed!");
             }
         } catch (InterruptedException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         // 关闭数据库连接
@@ -135,7 +135,7 @@ public class UrlFollowWorker extends BasicWorker implements Runnable {
             FollowParser.conn.close();
             Utils.conn.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         logger.info("Spider stop...");

@@ -1,21 +1,12 @@
 package com.alibaba.aliyun.crazyacking.spider.parser.bean;
 
 public class Weibo {
-    private String id = null;
-    private String poster = null;
-    private String content = null;
-    private String postTime = null;
-    private boolean hasPic = false;
-    private boolean isRepost = false;
-
-
-    public String getPostTime() {
-        return postTime;
-    }
-
-    public void setPostTime(String postTime) {
-        this.postTime = postTime;
-    }
+    private String id;
+    private String poster;
+    private String content;
+    private String postTime;
+    private boolean hasPic;
+    private boolean repost;
 
     public String getId() {
         return id;
@@ -41,6 +32,14 @@ public class Weibo {
         this.content = content;
     }
 
+    public String getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
+    }
+
     public boolean isHasPic() {
         return hasPic;
     }
@@ -50,11 +49,11 @@ public class Weibo {
     }
 
     public boolean isRepost() {
-        return isRepost;
+        return repost;
     }
 
-    public void setRepost(boolean isRepost) {
-        this.isRepost = isRepost;
+    public void setRepost(boolean repost) {
+        this.repost = repost;
     }
 
     @Override
@@ -63,7 +62,7 @@ public class Weibo {
                 "poster:\t\t" + poster + "\n" +
                 "content:\t" + content + "\n" +
                 "hasPic:\t\t" + hasPic + "\n" +
-                "isRepost:\t" + isRepost + "\n";
+                "repost:\t" + repost + "\n";
 
         return sb;
     }

@@ -1,9 +1,9 @@
 package com.alibaba.aliyun.crazyacking.spider.parser;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
+import com.alibaba.aliyun.crazyacking.spider.common.DBConnector;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Weibo;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
-import com.alibaba.aliyun.crazyacking.spider.utils.DBConnector;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,11 +26,15 @@ public class WeiboParser {
         return Jsoup.parse(content);
     }
 
-    // 截取网页网页源文件的目标内容
+    /*
+    截取网页网页源文件的目标内容
+     */
     public static List<Element> getGoalContent(Document doc) {
-        List<Element> weiboItems = new ArrayList<Element>();
+        List<Element> weiboItems = new ArrayList<>();
 
-        // 检查微博数量 <span class="tc">微博[1668]</span>
+        /*
+        检查微博数量
+         */
         if (Constants.CHECK_WEIBO_NUM) {
             Element element = doc.getElementsByClass("tc").get(0);
             int startIndex = element.text().indexOf("[");
@@ -42,7 +46,9 @@ public class WeiboParser {
             }
         }
 
-        // 检查是否包含微博节点
+        /*
+        检查微博数量
+         */
         Elements elements = doc.getElementsByClass("c");
         for (Element el : elements) {
             if (el.id().startsWith("M_")) {
@@ -53,7 +59,9 @@ public class WeiboParser {
         return weiboItems;
     }
 
-    // 解析微博的HTML DIV结构，提取微博ID、内容等信息，创建Weibo对象
+    /*
+    解析微博的HTML DIV结构，提取微博ID、内容等信息，创建Weibo对象
+     */
     private static Weibo parse(Element weiboEl, String poster) {
         Weibo weibo = new Weibo();
         List<Element> subDivs = weiboEl.children();
@@ -65,24 +73,32 @@ public class WeiboParser {
             weibo.setPostTime(Utils.parseDate(weiboEl.getElementsByClass("ct").get(0).text().split("来自")[0]));
 
             if (subDivsSize == 1) {
-                // 原创发布无附件微博
+                /*
+                原创发布无附件微博
+                 */
                 weibo.setRepost(false);
                 weibo.setHasPic(false);
                 weibo.setContent(weiboEl.getElementsByClass("ctt").get(0).text());
             } else if (subDivsSize == 2) {
                 if (subDivs.get(0).toString().contains("<span class=\"cmt\">原文转发")) {
-                    // 转发无附件微博
+                    /*
+                    转发无附件微博
+                     */
                     weibo.setRepost(true);
                     weibo.setHasPic(false);
                     weibo.setContent(getRepostReason(subDivs.get(1)));
                 } else {
-                    // 原创发布带附件微博
+                    /*
+                    原创发布带附件微博
+                     */
                     weibo.setRepost(false);
                     weibo.setHasPic(true);
                     weibo.setContent(weiboEl.getElementsByClass("ctt").get(0).text());
                 }
             } else if (subDivsSize == 3) {
-                // 转发带附件的微博
+                /*
+                转发带附件的微博
+                 */
                 weibo.setRepost(true);
                 weibo.setHasPic(true);
                 weibo.setContent(getRepostReason(subDivs.get(2)));
@@ -91,14 +107,19 @@ public class WeiboParser {
             }
         } catch (Exception e) {
             weibo = null;
-            logger.error(e.toString());
+            logger.error("", e);
             logger.error("Not a valid weibo item: " + weiboEl);
         }
 
         return weibo;
     }
 
-    // 从子div中获取转发原因
+    /**
+     * 从子div中获取转发原因
+     *
+     * @param processEl
+     * @return
+     */
     private static String getRepostReason(Element processEl) {
         StringBuilder repostReason = new StringBuilder();
         int endIndex = processEl.childNodes().size() - BACK_NODES_NUM_IN_REPOST_DIV;
@@ -110,12 +131,18 @@ public class WeiboParser {
         return repostReason.toString();
     }
 
-    // 将抓取的微博信息保存至本地文件
+    /**
+     * 将抓取的微博信息保存至本地文件
+     *
+     * @param weiboItems
+     * @param urlPath
+     */
     public static void createFile(List<Element> weiboItems, String urlPath) {
         String userID = Utils.getUserIdFromUrl(urlPath);
 
-        // 解析每一条微博，存入数据库
-        // Connection conn = DBConnector.getConnection();
+        /*
+        解析每一条微博，存入数据库
+         */
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO weibo (accountID, weiboID, content, postTime) VALUES (?, ?, ?, ?)");
             for (Element el : weiboItems) {
@@ -128,7 +155,7 @@ public class WeiboParser {
             }
             ps.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
     }
 }

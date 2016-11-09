@@ -1,10 +1,10 @@
 package com.alibaba.aliyun.crazyacking.spider.worker;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.parser.LogType;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.apache.http.client.CookieStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,20 +121,20 @@ public abstract class BasicWorker {
             account = AccountQueue.outElement();
             AccountQueue.addElement(account);
             // 使用切换账号登录
-            gsid = login(account.getUsername(), account.getPassword());
+            gsid = login(account.getUserName(), account.getPassword());
             // 登录成功，退出循环
             if (gsid != null) {
-                this.username = account.getUsername();
+                this.username = account.getUserName();
                 this.password = account.getPassword();
-                String logStr = "Switch to account: " + account.getUsername() + " success!";
+                String logStr = "Switch to account: " + account.getUserName() + " success!";
                 Utils.writeLog(LogType.SWITCH_ACCOUNT_LOG, logStr);
                 break;
             }
-            String logStr = "Switch to account: " + account.getUsername() + " failed!";
+            String logStr = "Switch to account: " + account.getUserName() + " failed!";
             Utils.writeLog(LogType.SWITCH_ACCOUNT_LOG, logStr);
         }
         // 如果取出的账号与当前的账号相同，则退出，表明队列中所有的账号都被试用一圈，均不可用
-        while (!account.getUsername().equals(username));
+        while (!account.getUserName().equals(username));
 
         return gsid;
     }
@@ -153,20 +153,20 @@ public abstract class BasicWorker {
             account = AccountQueue.outElement();
             AccountQueue.addElement(account);
             // 使用切换账号登录
-            cookie = loginForCookie(account.getUsername(), account.getPassword());
+            cookie = loginForCookie(account.getUserName(), account.getPassword());
             // 登录成功，退出循环
             if (cookie != null) {
-                this.username = account.getUsername();
+                this.username = account.getUserName();
                 this.password = account.getPassword();
-                String logStr = "Switch to account: " + account.getUsername() + " success!";
+                String logStr = "Switch to account: " + account.getUserName() + " success!";
                 Utils.writeLog(LogType.SWITCH_ACCOUNT_LOG, logStr);
                 break;
             }
-            String logStr = "Switch to account: " + account.getUsername() + " failed!";
+            String logStr = "Switch to account: " + account.getUserName() + " failed!";
             Utils.writeLog(LogType.SWITCH_ACCOUNT_LOG, logStr);
         }
         // 如果取出的账号与当前的账号相同，则退出，表明队列中所有的账号都被试用一圈，均不可用
-        while (!account.getUsername().equals(username));
+        while (!account.getUserName().equals(username));
 
         return cookie;
     }

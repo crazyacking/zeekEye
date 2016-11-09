@@ -2,7 +2,7 @@ package com.alibaba.aliyun.crazyacking.spider.handler;
 
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Page;
 import com.alibaba.aliyun.crazyacking.spider.queue.*;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
@@ -56,7 +56,7 @@ public class NextUrlHandler {
         logger.info("-------------------");
         logger.info("抓取到：" + WeiboUrlQueue.size());
         logger.info("已处理：" + VisitedWeiboUrlQueue.size());
-        logger.info("异常数：" + AbnormalAccountUrlQueue.size());
+        logger.info("异常数：" + AbnormalUrlQueue.size());
         logger.info("-------------------");
 
         return Constants.OK;
@@ -106,7 +106,7 @@ public class NextUrlHandler {
         logger.info("-------------------");
         logger.info("抓取到：" + CommentUrlQueue.size());
         logger.info("已处理：" + VisitedCommentUrlQueue.size());
-        logger.info("异常数：" + AbnormalAccountUrlQueue.size());
+        logger.info("异常数：" + AbnormalUrlQueue.size());
         logger.info("-------------------");
 
         return Constants.OK;
@@ -156,7 +156,7 @@ public class NextUrlHandler {
         logger.info("-------------------");
         logger.info("抓取到：" + RepostUrlQueue.size());
         logger.info("已处理：" + VisitedRepostUrlQueue.size());
-        logger.info("异常数：" + AbnormalAccountUrlQueue.size());
+        logger.info("异常数：" + AbnormalUrlQueue.size());
         logger.info("-------------------");
 
         return Constants.OK;
@@ -207,7 +207,7 @@ public class NextUrlHandler {
         logger.info("-------------------");
         logger.info("抓取到：" + FollowUrlQueue.size());
         logger.info("已处理：" + VisitedFollowUrlQueue.size());
-        logger.info("异常数：" + AbnormalAccountUrlQueue.size());
+        logger.info("异常数：" + AbnormalUrlQueue.size());
         logger.info("-------------------");
 
         return Constants.OK;

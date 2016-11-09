@@ -1,9 +1,9 @@
 package com.alibaba.aliyun.crazyacking.spider.parser;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
+import com.alibaba.aliyun.crazyacking.spider.common.DBConnector;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Follow;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
-import com.alibaba.aliyun.crazyacking.spider.utils.DBConnector;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -49,7 +49,7 @@ public class FollowParser {
             String followeeID = Utils.getUserIdFromImgUrl(followeeUrl);
 
             follow.setFollower(followerID);
-            follow.setFollowee(followeeID);
+            follow.setFollowed(followeeID);
             follow.setLevel(currentLevel);
         } catch (Exception e) {
             follow = null;
@@ -76,7 +76,7 @@ public class FollowParser {
 
                 if (follow != null) {
                     ps.setString(1, follow.getFollower());
-                    ps.setString(2, follow.getFollowee());
+                    ps.setString(2, follow.getFollowed());
                     ps.setInt(3, follow.getLevel());
                     ps.execute();
                 }
@@ -87,13 +87,13 @@ public class FollowParser {
                 if (follow != null && level < Constants.LEVEL) {
                     ps = conn.prepareStatement("INSERT INTO follower (follower, level) VALUES (?, ?)");
 
-                    ps.setString(1, follow.getFollowee());
+                    ps.setString(1, follow.getFollowed());
                     ps.setInt(2, level);
                     ps.execute();
                     ps.close();
                 }
             } catch (SQLException e) {
-                logger.error(e.toString());
+                logger.error("", e);
             }
         }
     }

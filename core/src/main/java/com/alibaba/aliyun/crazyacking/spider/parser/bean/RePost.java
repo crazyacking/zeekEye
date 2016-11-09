@@ -2,10 +2,10 @@ package com.alibaba.aliyun.crazyacking.spider.parser.bean;
 
 
 public class RePost {
-    private String id = null;
-    private String author = null;
-    private String time = null;
-    private String content = null;
+    private String id;
+    private String author;
+    private String time;
+    private String content;
 
 
     public String getAuthor() {

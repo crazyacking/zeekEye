@@ -1,4 +1,4 @@
-package com.alibaba.aliyun.crazyacking.spider.utils;
+package com.alibaba.aliyun.crazyacking.spider.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ public class DBConnector {
     public static String DB_NAME;
 
     private DBConnector() {
-
     }
 
     public static Connection getConnection() {
@@ -24,7 +23,7 @@ public class DBConnector {
             String DBUrl = "jdbc:sqlserver://127.0.0.1:1433;databaseName=" + DB_NAME + ";user=" + USERNAME + ";password=" + PASSWORD;
             conn = DriverManager.getConnection(DBUrl);
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
         return conn;
     }

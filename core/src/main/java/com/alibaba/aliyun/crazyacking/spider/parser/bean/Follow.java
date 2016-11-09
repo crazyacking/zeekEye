@@ -2,9 +2,9 @@ package com.alibaba.aliyun.crazyacking.spider.parser.bean;
 
 public class Follow {
 
-    private String follower;
-    private String followee;
     private int level;
+    private String follower;
+    private String followed;
 
     public String getFollower() {
         return follower;
@@ -14,12 +14,12 @@ public class Follow {
         this.follower = follower;
     }
 
-    public String getFollowee() {
-        return followee;
+    public String getFollowed() {
+        return followed;
     }
 
-    public void setFollowee(String followee) {
-        this.followee = followee;
+    public void setFollowed(String followed) {
+        this.followed = followed;
     }
 
     public int getLevel() {

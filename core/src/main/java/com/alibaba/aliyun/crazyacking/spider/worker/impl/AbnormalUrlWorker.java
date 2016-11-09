@@ -1,13 +1,13 @@
 package com.alibaba.aliyun.crazyacking.spider.worker.impl;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.fetcher.WeiboFetcher;
 import com.alibaba.aliyun.crazyacking.spider.parser.WeiboParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
-import com.alibaba.aliyun.crazyacking.spider.queue.AbnormalAccountUrlQueue;
+import com.alibaba.aliyun.crazyacking.spider.queue.AbnormalUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.VisitedWeiboUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.WeiboUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import com.alibaba.aliyun.crazyacking.spider.worker.BasicWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +19,8 @@ import java.sql.SQLException;
  *
  * @author crazyacking
  */
-public class UrlAbnormalWorker extends BasicWorker implements Runnable {
-    private static final Logger logger = LoggerFactory.getLogger(UrlAbnormalWorker.class.getName());
+public class AbnormalUrlWorker extends BasicWorker implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger(AbnormalUrlWorker.class.getName());
 
     /**
      * 下载对应页面并分析出页面对应URL，放置在未访问队列中
@@ -31,7 +31,7 @@ public class UrlAbnormalWorker extends BasicWorker implements Runnable {
         logger.info("-------------------");
         logger.info("抓取到：" + WeiboUrlQueue.size());
         logger.info("已处理：" + VisitedWeiboUrlQueue.size());
-        logger.info("异常数：" + AbnormalAccountUrlQueue.size());
+        logger.info("异常数：" + AbnormalUrlQueue.size());
         logger.info("-------------------");
 
         return WeiboFetcher.getContentFromUrl(url).getContent();
@@ -42,7 +42,7 @@ public class UrlAbnormalWorker extends BasicWorker implements Runnable {
         // 首先获取账号并登录
         Account account = AccountQueue.outElement();
         AccountQueue.addElement(account);
-        this.username = account.getUsername();
+        this.username = account.getUserName();
         this.password = account.getPassword();
 
         // 使用账号登录
@@ -75,7 +75,7 @@ public class UrlAbnormalWorker extends BasicWorker implements Runnable {
             }
 
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         // 关闭数据库连接
@@ -83,7 +83,7 @@ public class UrlAbnormalWorker extends BasicWorker implements Runnable {
             WeiboParser.conn.close();
             Utils.conn.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         logger.info("Spider stop...");

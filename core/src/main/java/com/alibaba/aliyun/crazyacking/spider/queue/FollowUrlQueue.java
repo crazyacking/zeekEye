@@ -8,9 +8,13 @@ import java.util.LinkedList;
  * @author crazyacking
  */
 public class FollowUrlQueue {
-    // 队列中对应最多的超链接数量
+    /*
+    队列中对应最多的超链接数量
+     */
     public static final int MAX_SIZE = 10000;
-    // 超链接队列
+    /*
+    超链接队列
+     */
     private static final LinkedList<String> followUrlQueue = new LinkedList<String>();
 
     public synchronized static void addElement(String url) {

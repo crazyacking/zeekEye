@@ -1,4 +1,4 @@
-package com.alibaba.aliyun.crazyacking.spider.recommend;
+package com.alibaba.aliyun.crazyacking.spider.referrer;
 
 /**
  * Created by crazyacking on 2015/7/3.

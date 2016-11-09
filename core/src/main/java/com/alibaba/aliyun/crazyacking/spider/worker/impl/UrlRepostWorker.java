@@ -1,13 +1,13 @@
 package com.alibaba.aliyun.crazyacking.spider.worker.impl;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Initializer;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.fetcher.RepostFetcher;
 import com.alibaba.aliyun.crazyacking.spider.handler.NextUrlHandler;
 import com.alibaba.aliyun.crazyacking.spider.parser.RepostParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.RepostUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Initializer;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import com.alibaba.aliyun.crazyacking.spider.worker.BasicWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class UrlRepostWorker extends BasicWorker implements Runnable {
         // 首先获取账号并登录
         Account account = AccountQueue.outElement();
         AccountQueue.addElement(account);
-        this.username = account.getUsername();
+        this.username = account.getUserName();
         this.password = account.getPassword();
 
         // 使用账号登录
@@ -67,7 +67,7 @@ public class UrlRepostWorker extends BasicWorker implements Runnable {
                         // 仍为空，从数据库中取
                         if (RepostUrlQueue.isEmpty()) {
                             logger.info(">> Add new repost Url...");
-                            initializer.initializeRepostUrl();
+                            initializer.initRepostUrl();
 
                             // 拿完还是空，退出爬虫
                             if (RepostUrlQueue.isEmpty()) {
@@ -81,7 +81,7 @@ public class UrlRepostWorker extends BasicWorker implements Runnable {
                 logger.info(username + " login failed!");
             }
         } catch (InterruptedException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         // 关闭数据库连接
@@ -89,7 +89,7 @@ public class UrlRepostWorker extends BasicWorker implements Runnable {
             RepostParser.conn.close();
             Utils.conn.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         logger.info("Spider stop...");

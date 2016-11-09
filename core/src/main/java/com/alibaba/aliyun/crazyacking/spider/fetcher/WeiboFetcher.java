@@ -1,11 +1,11 @@
 package com.alibaba.aliyun.crazyacking.spider.fetcher;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
 import com.alibaba.aliyun.crazyacking.spider.parser.WeiboParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Page;
 import com.alibaba.aliyun.crazyacking.spider.queue.VisitedWeiboUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.WeiboUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -83,7 +83,7 @@ public class WeiboFetcher {
                 }
             }
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
 
             // 处理超时，和请求忙相同
             url = url.split("&gsid")[0];

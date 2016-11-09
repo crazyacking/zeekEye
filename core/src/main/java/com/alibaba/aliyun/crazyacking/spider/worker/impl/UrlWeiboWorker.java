@@ -1,13 +1,13 @@
 package com.alibaba.aliyun.crazyacking.spider.worker.impl;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Initializer;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.fetcher.WeiboFetcher;
 import com.alibaba.aliyun.crazyacking.spider.handler.NextUrlHandler;
 import com.alibaba.aliyun.crazyacking.spider.parser.WeiboParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.WeiboUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Initializer;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import com.alibaba.aliyun.crazyacking.spider.worker.BasicWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class UrlWeiboWorker extends BasicWorker implements Runnable {
         //获取一个登录账号
         Account account = AccountQueue.outElement();
         AccountQueue.addElement(account);
-        this.username = account.getUsername();
+        this.username = account.getUserName();
         this.password = account.getPassword();
 
         // 使用账号登录，并获取gsid
@@ -76,7 +76,7 @@ public class UrlWeiboWorker extends BasicWorker implements Runnable {
                         if (WeiboUrlQueue.isEmpty()) {
                             logger.info(">> Add new weibo Url...");
                             logger.info(">> Add new weibo Url...");
-                            initializer.initializeWeiboUrl();
+                            initializer.initWeiboUrl();
 
                             // 拿完还是空，退出爬虫
                             if (WeiboUrlQueue.isEmpty()) {
@@ -93,13 +93,13 @@ public class UrlWeiboWorker extends BasicWorker implements Runnable {
             }
 
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
         try {
             WeiboParser.conn.close();
             Utils.conn.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
         logger.info("Spider stop...");
         logger.info("Spider stop...");

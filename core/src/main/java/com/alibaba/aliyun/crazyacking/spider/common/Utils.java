@@ -1,9 +1,10 @@
-package com.alibaba.aliyun.crazyacking.spider.utils;
+package com.alibaba.aliyun.crazyacking.spider.common;
 
 import com.alibaba.aliyun.crazyacking.spider.fetcher.FetcherType;
 import com.alibaba.aliyun.crazyacking.spider.parser.LogType;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.*;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,11 +16,13 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Utils {
     public static final Connection conn = DBConnector.getConnection();
-    private static final Logger logger = LoggerFactory.getLogger(Utils.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(Utils.class);
     private static final SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    private final static String ENCODING = "UTF-8";
 
     /**
      * 检测字符串是否为null，或空字符串
@@ -122,7 +125,7 @@ public class Utils {
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
     }
 
@@ -167,25 +170,17 @@ public class Utils {
     }
 
     /**
-     * 从login_account.txt中读取爬虫账号，作为账号队列
-     * 格式：account----email----password
+     * 从帐号配置文件初始化账号队列
      */
-    public static void readAccountFromFile() {
+    public static void initAccount() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(Constants.LOGIN_ACCOUNT_PATH));
-            String accountLine;
-//			logger.info("program running here..");
-            while (((accountLine = reader.readLine()) != null)) {
-                String[] account = accountLine.split("----");
-//				logger.info(account[0]);
-//				logger.info(account[2]);
+            List<String> lines = FileUtils.readLines(new File(Constants.LOGIN_ACCOUNT_PATH), ENCODING);
+            for (String line : lines) {
+                String[] account = line.split(" ");
                 AccountQueue.addElement(new Account(account[0], account[2]));
             }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            logger.error(e.toString());
-        } catch (IOException e) {
-            logger.error(e.toString());
+        } catch (Exception e) {
+            logger.error("", e);
         }
     }
 
@@ -206,7 +201,7 @@ public class Utils {
             rs.close();
             ps.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
     }
 
@@ -217,7 +212,7 @@ public class Utils {
                 || content.contains("<div class=\"me\">用户不存在哦!</div>")
                 || content.contains("<div class=\"me\">请求页不存在")) {
 
-            AbnormalAccountUrlQueue.addElement(url);
+            AbnormalUrlQueue.addElement(url);
 
             logger.info(">> 当前访问的用户是异常账号: " + content);
             logger.info("-----------------------------------");
@@ -240,7 +235,7 @@ public class Utils {
                 logger.info("已处理的页面数：" + VisitedFollowUrlQueue.size());
             }
 
-            logger.info("异常账号数         ：" + AbnormalAccountUrlQueue.size());
+            logger.info("异常账号数         ：" + AbnormalUrlQueue.size());
             logger.info("----------------------------------");
             returnMsg = Constants.OK;
         }

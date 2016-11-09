@@ -179,7 +179,7 @@ class WebDataExtraction {
             int Result = stmt.executeUpdate(SQL);
 
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         } finally {
             if (rs != null)
                 try {

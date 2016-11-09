@@ -5,6 +5,6 @@ public class FetcherType {
     public static final int COMMENT = 2;
     public static final int REPOST = 3;
     public static final int WEIBO = 4;
-    public static final int VIP_TYPE = 5;
+    public static final int VIP = 5;
     public static final int FOLLOW = 6;
 }

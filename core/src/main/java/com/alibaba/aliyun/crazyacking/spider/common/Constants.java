@@ -1,4 +1,4 @@
-package com.alibaba.aliyun.crazyacking.spider.utils;
+package com.alibaba.aliyun.crazyacking.spider.common;
 
 public class Constants {
     public static final String ACCOUNT_FORBIDDEN = "forbidden";

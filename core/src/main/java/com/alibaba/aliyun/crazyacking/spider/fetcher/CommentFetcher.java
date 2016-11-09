@@ -1,11 +1,11 @@
 package com.alibaba.aliyun.crazyacking.spider.fetcher;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
 import com.alibaba.aliyun.crazyacking.spider.parser.CommentParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Page;
 import com.alibaba.aliyun.crazyacking.spider.queue.CommentUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.VisitedCommentUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -61,7 +61,7 @@ public class CommentFetcher {
                 }
             }
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
             url = url.split("&gsid")[0];
             logger.info(">> Put back url: " + url);
             CommentUrlQueue.addFirstElement(url);

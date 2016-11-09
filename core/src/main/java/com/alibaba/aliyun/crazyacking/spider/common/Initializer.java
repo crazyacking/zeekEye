@@ -1,4 +1,4 @@
-package com.alibaba.aliyun.crazyacking.spider.utils;
+package com.alibaba.aliyun.crazyacking.spider.common;
 
 import com.alibaba.aliyun.crazyacking.spider.queue.CommentUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.FollowUrlQueue;
@@ -6,14 +6,16 @@ import com.alibaba.aliyun.crazyacking.spider.queue.RepostUrlQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.WeiboUrlQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 
 /**
- * Created by crazyacking on 2015/7/3.
+ * Created by crazyacking on 2015/4/3.
  */
+@Component("initializer")
 public class Initializer {
 
     private static final Logger logger = LoggerFactory.getLogger(Initializer.class);
@@ -22,9 +24,8 @@ public class Initializer {
     /**
      * 数据库中读取用户账号，并生成第一页微博的url，放入WeiboUrlQueue
      */
-    public static synchronized void initializeWeiboUrl() {
+    public static synchronized void initWeiboUrl() {
         String querySql = "SELECT accountID FROM INIT_USER WHERE isFetched = 0";
-//		Connection conn = DBConnector.getConnection();
         PreparedStatement ps;
         Statement st;
         ResultSet rs;
@@ -48,7 +49,6 @@ public class Initializer {
 
             conn.commit();
             if (accountID != null) {
-                // 提交成功后，再放入队列
                 /*
                 * 将初始用户的粉丝页面的Url入队
 				* */
@@ -57,8 +57,10 @@ public class Initializer {
                 logger.info("the url is =   " + "http://weibo.com/p/100505" + accountID + "/follow?relate=fans&from=100505&wvr=6&mod=headfans&current=fans#place");
             }
         } catch (SQLException e) {
-            logger.error(e.toString());
-            // 提交失败 roll back，并将放入队列的URL拿出来
+            logger.error("", e);
+            /*
+            提交失败 roll back，并将放入队列的URL拿出来
+             */
             try {
                 conn.rollback();
             } catch (SQLException e1) {
@@ -68,7 +70,7 @@ public class Initializer {
             try {
                 conn.close();
             } catch (SQLException e) {
-                logger.error(e.toString());
+                logger.error("", e);
             }
         }
     }
@@ -76,9 +78,8 @@ public class Initializer {
     /**
      * 数据库中读取用微博账号，并生成第一页评论的url，放入CommentUrlQueue
      */
-    public static synchronized void initializeCommentUrl() {
+    public static synchronized void initCommentUrl() {
         String querySql = "SELECT weiboID FROM weibo WHERE isCommentFetched = 0 LIMIT 1";
-//		Connection conn = DBConnector.getConnection();
         PreparedStatement ps;
         Statement st;
         ResultSet rs;
@@ -102,12 +103,10 @@ public class Initializer {
 
             conn.commit();
             if (weiboID != null) {
-                // 提交成功后，再放入队列
                 CommentUrlQueue.addElement(Constants.COMMENT_BASE_STR + weiboID + "?page=1");
             }
         } catch (SQLException e) {
-            logger.error(e.toString());
-            // 提交失败 roll back，并将放入队列的URL拿出来
+            logger.error("", e);
             try {
                 conn.rollback();
             } catch (SQLException e1) {
@@ -117,7 +116,7 @@ public class Initializer {
             try {
                 conn.close();
             } catch (SQLException e) {
-                logger.error(e.toString());
+                logger.error("", e);
             }
         }
     }
@@ -125,9 +124,8 @@ public class Initializer {
     /**
      * 数据库中读取微博账号，并生成第一页转发的url，放入WeiboUrlQueue
      */
-    public static synchronized void initializeRepostUrl() {
+    public static synchronized void initRepostUrl() {
         String querySql = "SELECT weiboID FROM weibo WHERE isRepostFetched = 0 LIMIT 1";
-//		Connection conn = DBConnector.getConnection();
         PreparedStatement ps;
         Statement st;
         ResultSet rs;
@@ -151,12 +149,10 @@ public class Initializer {
 
             conn.commit();
             if (weiboID != null) {
-                // 提交成功后，再放入队列
                 RepostUrlQueue.addElement(Constants.REPOST_BASE_STR + weiboID + "?page=1");
             }
         } catch (SQLException e) {
-            logger.error(e.toString());
-            // 提交失败 roll back，并将放入队列的URL拿出来
+            logger.error("", e);
             try {
                 conn.rollback();
             } catch (SQLException e1) {
@@ -168,7 +164,7 @@ public class Initializer {
     /**
      * 从account.txt中读取用户账号，并生成用户主页的url，放入AccountInfoUrlQueue
      */
-    public static void initializeAbnormalWeiboUrl() {
+    public static void initAbnormalUrl() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(Constants.ABNORMAL_WEIBO_CLEANED_PATH), "utf-8"));
 
@@ -178,12 +174,11 @@ public class Initializer {
             }
             reader.close();
         } catch (IOException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
     }
 
-    public static int initializeFollowUrl() {
-//		String querySql = "SELECT follower, level FROM follower WHERE isFetched = 0 LIMIT 1";
+    public static int initFollowUrl() {
         String querySql = "SELECT follower, LEVEL FROM follower WHERE isFetched = 0 ORDER BY LEVEL ASC LIMIT 1";
         PreparedStatement ps;
         Statement st;
@@ -192,7 +187,9 @@ public class Initializer {
         int level = Integer.MAX_VALUE;
 
         try {
-            // 获取本轮follower，level
+            /*
+            获取本轮follower，level
+             */
             conn.setAutoCommit(false);
             conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 
@@ -210,15 +207,17 @@ public class Initializer {
             st.close();
 
             conn.commit();
-
-            // 当本轮level < Constants.LEVEL，才添加队列URL
+            /*
+            当本轮level < Constants.LEVEL，才添加队列URL
+             */
             if (level < Constants.LEVEL) {
                 FollowUrlQueue.addElement("http://weibo.cn/" + followerID + "/follow");
             }
         } catch (SQLException e) {
-            logger.error(e.toString());
-
-            // 提交失败 roll back
+            logger.error("", e);
+            /*
+            提交失败 roll back
+             */
             try {
                 conn.rollback();
             } catch (SQLException e1) {
@@ -235,17 +234,21 @@ public class Initializer {
     public void initializeParams() {
         InputStream in;
         try {
-            in = new BufferedInputStream(new FileInputStream("conf\\spider.properties"));
+            in = new BufferedInputStream(new FileInputStream("classpath:conf\\spider.properties"));
             Properties properties = new Properties();
             properties.load(in);
 
-            // 从配置文件中读取数据库连接参数
+            /*
+            从配置文件中读取数据库连接参数
+             */
             DBConnector.CONN_URL = properties.getProperty("DB.connUrl");
             DBConnector.DB_NAME = properties.getProperty("DB.name");
             DBConnector.USERNAME = properties.getProperty("DB.username");
             DBConnector.PASSWORD = properties.getProperty("DB.password");
 
-            // 从配置文件中读取根目录，并设置相关文件地址
+            /*
+            从配置文件中读取根目录，并设置相关文件地址
+             */
             Constants.ROOT_DISK = properties.getProperty("spider.rootDisk");
             Constants.REPOST_LOG_PATH = Constants.ROOT_DISK + "repost_log.txt";
             Constants.COMMENT_LOG_PATH = Constants.ROOT_DISK + "comment_log.txt";
@@ -257,26 +260,18 @@ public class Initializer {
             Constants.ABNORMAL_WEIBO_PATH = Constants.ROOT_DISK + "abnormal_weibo.txt";
             Constants.ABNORMAL_WEIBO_CLEANED_PATH = Constants.ROOT_DISK + "abnormal_weibo_cleaned.txt";
 
-            // 从配置文件中读取爬虫任务类型
-//            WeiboSpiderStarter.TYPE = properties.getProperty("spider.type");
-
-            // 从配置文件中读取follow爬取相关参数
-//            if (TYPE.equals("follow")) {
-//                Constants.LEVEL = Integer.parseInt(properties.getProperty("follow.level"));
-//                Constants.FANS_NO_MORE_THAN = Integer.parseInt(properties.getProperty("follow.maxFansNum"));
-//            }
-
-            // 从配置文件中读取微博相关参数
+            /*
+            从配置文件中读取微博相关参数
+             */
             Constants.CHECK_WEIBO_NUM = Boolean.parseBoolean(properties.getProperty("weibo.checkWeiboNum", "false"));
             if (Constants.CHECK_WEIBO_NUM) {
                 Constants.WEIBO_NO_MORE_THAN = Integer.parseInt(properties.getProperty("weibo.maxWeiboNum"));
             }
-
             in.close();
         } catch (FileNotFoundException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         } catch (IOException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.alibaba.aliyun.crazyacking.spider.parser;
 
+import com.alibaba.aliyun.crazyacking.spider.common.DBConnector;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.RePost;
-import com.alibaba.aliyun.crazyacking.spider.utils.DBConnector;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -89,12 +89,12 @@ public class RepostParser {
             }
             ps.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
-                logger.error(e.toString());
+                logger.error("", e);
             }
         }
 

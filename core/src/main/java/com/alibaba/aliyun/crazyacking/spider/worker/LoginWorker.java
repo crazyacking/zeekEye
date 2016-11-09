@@ -1,6 +1,6 @@
 package com.alibaba.aliyun.crazyacking.spider.worker;
 
-import com.alibaba.aliyun.crazyacking.spider.utils.Constants;
+import com.alibaba.aliyun.crazyacking.spider.common.Constants;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -34,18 +34,25 @@ class LoginWorker {
         String content = null;
         String gsid = null;
 
-        // 由于在登录手机版微博时，会产生一次重定向的过程，因此登录过程分为POST和GET两次请求。
-        // 此外POST时的password name是动态的，因此要先GET一次页面，获取password name，共三次请求。
-        // 第一次，GET 页面，获取password name和action参数
-        // 第二次，提交登录信息，根据返回头Location获取gsid
-        // 第三次，将gid拼接到weibo.cn之后，访问首页，获取cookie
-        try {
-            // 1. 创建GET请求，获取动态的Password Name和action参数，并设置PostForm值
-            String pwdName = null;
-            String action = null;
-            List<NameValuePair> formParams = new ArrayList<NameValuePair>();
+        /*
+        由于在登录手机版微博时，会产生一次重定向的过程，因此登录过程分为POST和GET两次请求。
+        此外POST时的password name是动态的，因此要先GET一次页面，获取password name，共三次请求。
+        1. GET 页面，获取password name和action参数
+        2. 提交登录信息，根据返回头Location获取gsid
+        3. 将gid拼接到weibo.cn之后，访问首页，获取cookie
+         */
 
-            // 创建GET请求
+        /*
+        1. 创建GET请求，获取动态的Password Name和action参数，并设置PostForm值
+         */
+        String pwdName = null;
+        String action = null;
+        List<NameValuePair> formParams = new ArrayList<NameValuePair>();
+        try {
+
+            /*
+            创建GET请求
+             */
             HttpGet pwdNameGet = new HttpGet(LOGIN_URL);
 
             // 设置请求头
@@ -60,11 +67,11 @@ class LoginWorker {
                 Elements inputs = doc.getElementsByTag("input");
                 Element form = doc.getElementsByTag("form").get(0);
 
-                for (Object input1 : inputs) {
+                for (Element input : inputs) {
 
-                    Element input = input1;
-
-                    // 从input组件中筛选出密码框，并获取password name
+                    /*
+                    从input组件中筛选出密码框，并获取password name
+                     */
                     if (input.attr("type").equalsIgnoreCase("password")
                             && input.attr("name").startsWith("password_")) {
                         pwdName = input.attr("name");
@@ -136,7 +143,7 @@ class LoginWorker {
             logger.info(">> login response content: \n" + content);
             logger.info(">> login response cookies: \n" + client.getCookieStore().getCookies().toString());
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
         // 账号被禁，跳转到微博广场，所以返回null
         if (content == null || content.contains(Constants.FORBIDDEN_PAGE_TITILE)) {
@@ -150,12 +157,13 @@ class LoginWorker {
         String content = null;
         String gsid = null;
         CookieStore cookie = null;
-
-        // 由于在登录手机版微博时，会产生一次重定向的过程，因此登录过程分为POST和GET两次请求。
-        // 此外POST时的password name是动态的，因此要先GET一次页面，获取password name，共三次请求。
-        // 第一次，GET 页面，获取password name和action参数
-        // 第二次，提交登录信息，根据返回头Location获取gsid
-        // 第三次，将gid拼接到weibo.cn之后，访问首页，获取cookie
+        /*
+        由于在登录手机版微博时，会产生一次重定向的过程，因此登录过程分为POST和GET两次请求。
+        此外POST时的password name是动态的，因此要先GET一次页面，获取password name，共三次请求。
+        1. GET 页面，获取password name和action参数
+        2. 提交登录信息，根据返回头Location获取gsid
+        3. 将gid拼接到weibo.cn之后，访问首页，获取cookie
+         */
         try {
             // 1. 创建GET请求，获取动态的Password Name和action参数，并设置PostForm值
             String pwdName = null;
@@ -177,22 +185,26 @@ class LoginWorker {
                 Elements inputs = doc.getElementsByTag("input");
                 Element form = doc.getElementsByTag("form").get(0);
 
-                for (Object input1 : inputs) {
+                for (Element input : inputs) {
 
-                    Element input = input1;
-
-                    // 从input组件中筛选出密码框，并获取password name
+                    /*
+                    从input组件中筛选出密码框，并获取password name
+                     */
                     if (input.attr("type").equalsIgnoreCase("password")
                             && input.attr("name").startsWith("password_")) {
                         pwdName = input.attr("name");
                     }
-                    // 将隐藏域放入Form
+                    /*
+                    将隐藏域放入Form
+                     */
                     else if (input.attr("type").equalsIgnoreCase("hidden")) {
                         formParams.add(new BasicNameValuePair(input.attr("name"), input.attr("value")));
                     }
                 }
 
-                // 从form中获取action参数
+                /*
+                从form中获取action参数
+                 */
                 action = form.attr("action");
             }
 
@@ -254,7 +266,7 @@ class LoginWorker {
             logger.info(">> login response content: \n" + content);
             logger.info(">> login response cookies: \n" + cookie.getCookies().toString());
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         // 账号被禁，跳转到微博广场，所以返回null

@@ -7,7 +7,7 @@ import java.util.HashSet;
  *
  * @author crazyacking
  */
-public class AbnormalAccountUrlQueue {
+public class AbnormalUrlQueue {
     private static final HashSet<String> visitedUrlQueue = new HashSet<String>();
 
     public synchronized static void addElement(String url) {

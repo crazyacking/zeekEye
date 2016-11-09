@@ -2,11 +2,18 @@ package com.alibaba.aliyun.crazyacking.spider.parser.bean;
 
 
 public class Comment {
-    private String id = null;
-    private String author = null;
-    private String time = null;
-    private String content = null;
+    private String id;
+    private String author;
+    private String time;
+    private String content;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getAuthor() {
         return author;
@@ -16,17 +23,6 @@ public class Comment {
         this.author = author;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
     public String getTime() {
         return time;
     }
@@ -34,7 +30,6 @@ public class Comment {
     public void setTime(String time) {
         this.time = time;
     }
-
 
     public String getContent() {
         return content;
@@ -44,17 +39,15 @@ public class Comment {
         this.content = content;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", author='" + author + '\'' +
+                ", time='" + time + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 
-//	public String toString(){
-//		StringBuilder sb = new StringBuilder();
-//		
-//		sb.append("id:\t\t").append(id).append("\n")
-//		  .append("poster:\t\t").append(poster).append("\n")
-//		  .append("content:\t").append(content).append("\n")
-//		  .append("hasPic:\t\t").append(hasPic).append("\n")
-//		  .append("isRepost:\t").append(isRepost).append("\n");
-//		
-//		return sb.toString();
-//	}
 }
 

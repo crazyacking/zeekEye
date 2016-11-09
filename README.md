@@ -1,18 +1,19 @@
 # zeekEye
-##-- Programmable spidering of web sites with Java
+##-- A Fast and Powerful Scraping and Web Crawling Framework
 
+[![build](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)](https://github.com/crazyacking/zeekEye)
+[![module](https://img.shields.io/puppetforge/mc/camptocamp.svg)](https://github.com/crazyacking/zeekEye)
+[![license](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/crazyacking/zeekEye)
 
-[![build](https://img.shields.io/codeship/d6c1ddd0-16a3-0132-5f85-2e35c05e22b1/master.svg)](https://github.com/crazyacking/Spider--Java/tree/master/src/cn/edu/hut/crazyacking/spider)
-[![module](https://img.shields.io/puppetforge/mc/camptocamp.svg)](https://github.com/crazyacking/Spider--Java/tree/master/src/cn/edu/hut/crazyacking/spider)
-[![license](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/crazyacking/Spider--Java/tree/master/.idea)
+![zeekEyE-logo](http://images2015.cnblogs.com/blog/606573/201609/606573-20160925160652775-985449199.png)
 
-**zeekEye**是一款新浪微博爬虫，采用`Java`语言开发，基于`hetrix`爬虫架构,使用`HTTPClient4.0`和`Apache4.0`网络包.
+**zeekEye**是一款轻量级垂直爬虫，针对但不限于新浪微博，采用`Java`语言开发，基于`hetrix`架构，使用`HTTPClient4.0`和`Apache4.0`网络包.
 
 特点概述：
 
 - **数据存储**：采用`MySQL`数据库存储数据，支持多线程并发操作.
 
-- **功能实现**：模拟微博登录、爬取微博用户信息、用户评论、提取数据、建立数据表、数据成份分析。待更新... 
+- **功能实现**：模拟微博登录、爬取微博用户信息、用户评论、提取数据、建立数据表、数据成份分析。待更新...
 
 - **待实现**：互粉推荐、情感分析、数据聚类.
 
@@ -43,14 +44,14 @@
 
 ``` bash
   git clone https://github.com/crazyacking/zeekEye.git
-  javac -cp /home/username/Documents/Spider--Java/src/cn/edu/hut/crazyacking/spider/Spider.jar  WeiboSpiderStarter.java
-  java -cp /home/username/Documents/Spider--Java/src/cn/edu/hut/crazyacking/spider/Spider.jar : WeiboSpiderStarter
+  javac -cp /zeekEye/core/src/test/SpiderStarter.java
+  java -cp /zeekEye/core/src/test/SpiderStarter.class
   ...
 ```
 默认编辑器是IntelliJ IDEA 14.1.4，开发环境为jdk1.7.0，编译执行前先用IntelliJ IDEA把项目源码导出成jar包.
 ## API(如何使用)
 ### project config
-``` python
+``` bash
   conf/spider.properties文件为整个项目相关参数的配置文件，包括数据库接口地址、并行线程、爬取数量上限的配置等.
 ```
 

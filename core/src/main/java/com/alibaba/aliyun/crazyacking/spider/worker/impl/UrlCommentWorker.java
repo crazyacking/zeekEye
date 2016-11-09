@@ -1,13 +1,13 @@
 package com.alibaba.aliyun.crazyacking.spider.worker.impl;
 
+import com.alibaba.aliyun.crazyacking.spider.common.Initializer;
+import com.alibaba.aliyun.crazyacking.spider.common.Utils;
 import com.alibaba.aliyun.crazyacking.spider.fetcher.CommentFetcher;
 import com.alibaba.aliyun.crazyacking.spider.handler.NextUrlHandler;
 import com.alibaba.aliyun.crazyacking.spider.parser.CommentParser;
 import com.alibaba.aliyun.crazyacking.spider.parser.bean.Account;
 import com.alibaba.aliyun.crazyacking.spider.queue.AccountQueue;
 import com.alibaba.aliyun.crazyacking.spider.queue.CommentUrlQueue;
-import com.alibaba.aliyun.crazyacking.spider.utils.Initializer;
-import com.alibaba.aliyun.crazyacking.spider.utils.Utils;
 import com.alibaba.aliyun.crazyacking.spider.worker.BasicWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class UrlCommentWorker extends BasicWorker implements Runnable {
         // 首先获取账号并登录
         Account account = AccountQueue.outElement();
         AccountQueue.addElement(account);
-        this.username = account.getUsername();
+        this.username = account.getUserName();
         this.password = account.getPassword();
 
         // 使用账号登录
@@ -67,7 +67,7 @@ public class UrlCommentWorker extends BasicWorker implements Runnable {
                         // 仍为空，从数据库中取
                         if (CommentUrlQueue.isEmpty()) {
                             logger.info(">> Add new comment Url...");
-                            initializer.initializeCommentUrl();
+                            initializer.initCommentUrl();
 
                             // 拿完还是空，退出爬虫
                             if (CommentUrlQueue.isEmpty()) {
@@ -81,7 +81,7 @@ public class UrlCommentWorker extends BasicWorker implements Runnable {
                 logger.info(username + " login failed!");
             }
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         // 关闭数据库连接
@@ -89,7 +89,7 @@ public class UrlCommentWorker extends BasicWorker implements Runnable {
             CommentParser.conn.close();
             Utils.conn.close();
         } catch (SQLException e) {
-            logger.error(e.toString());
+            logger.error("", e);
         }
 
         logger.info("Spider stop...");
