@@ -1,6 +1,6 @@
-import com.alibaba.aliyun.crazyacking.spider.common.Initializer;
-import com.alibaba.aliyun.crazyacking.spider.common.Utils;
-import com.alibaba.aliyun.crazyacking.spider.worker.impl.*;
+import cn.edu.hut.crazyacking.spider.common.Initializer;
+import cn.edu.hut.crazyacking.spider.common.Utils;
+import cn.edu.hut.crazyacking.spider.worker.impl.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,7 +23,7 @@ public class SpiderStarter {
 
     @Test
     public void startSpider() {
-        initializer.initializeParams();
+        initializer.init();
         Utils.initAccount();
 
         switch (TYPE) {
@@ -46,7 +46,6 @@ public class SpiderStarter {
     }
 
     private void fetchAbnormalWeibo() {
-        Utils.initAccount();
         Initializer.initAbnormalUrl();
         for (int i = 0; i < WORKER_NUM; i++) {
             new Thread(new AbnormalUrlWorker()).start();
