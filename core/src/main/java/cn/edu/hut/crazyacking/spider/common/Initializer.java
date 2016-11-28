@@ -234,7 +234,7 @@ public class Initializer {
     public void init() {
         InputStream in;
         try {
-            in = new BufferedInputStream(new FileInputStream("classpath:conf\\spider.properties"));
+            in = new BufferedInputStream(new FileInputStream("..\\conf\\spider.properties"));
             Properties properties = new Properties();
             properties.load(in);
 

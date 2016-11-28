@@ -56,6 +56,10 @@
             <version>3.2.8.RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
     </dependencies>
     <modelVersion>4.0.0</modelVersion>
