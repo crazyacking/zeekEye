@@ -1,11 +1,12 @@
 # zeekEye
-##-- A Fast and Powerful Scraping and Web Crawling Framework
+### A Fast and Powerful Scraping and Web Crawling Framework
 
 [![build](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)](https://github.com/crazyacking/zeekEye)
 [![module](https://img.shields.io/puppetforge/mc/camptocamp.svg)](https://github.com/crazyacking/zeekEye)
 [![license](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/crazyacking/zeekEye)
 
-![zeekEyE-logo](http://images2015.cnblogs.com/blog/606573/201609/606573-20160925160652775-985449199.png)
+<img src="http://images2015.cnblogs.com/blog/606573/201609/606573-20160925160652775-985449199.png" alt="" width="650" height="401">
+
 
 **zeekEye**是一款轻量级垂直爬虫，针对但不限于新浪微博，采用`Java`语言开发，基于`hetrix`架构，使用`HTTPClient4.0`和`Apache4.0`网络包.
 
