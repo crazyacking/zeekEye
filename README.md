@@ -88,7 +88,8 @@
 ### 设置冗余/日志级别
 `spider.log(level)` - 这儿的`level`是一个string，可以是`"debug"`, `"info"`, `"error"`
 
-###Source Code
+### Source Code
+
 The source code of zeekEye is made available for study purposes only. Neither it, its source code, nor its byte code may be modified and recompiled for public use by anyone except us.
 
 We do accept and encourage private modifications with the intent for said modifications to be added to the official public version.
