@@ -20,7 +20,11 @@ public class DBConnector {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            /*
+            替换为你的MySQL访问链接
+             */
             String DBUrl = "jdbc:sqlserver://127.0.0.1:1433;databaseName=" + DB_NAME + ";user=" + USERNAME + ";password=" + PASSWORD;
+            System.out.println(DBUrl);
             conn = DriverManager.getConnection(DBUrl);
         } catch (Exception e) {
             logger.error("", e);
