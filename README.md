@@ -1,7 +1,3 @@
-```
-大三时写的java课程设计，已停更
-```
-
 # zeekEye
 ### A Fast and Powerful Scraping and Web Crawling Framework
 
