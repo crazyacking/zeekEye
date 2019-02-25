@@ -15,7 +15,7 @@
         <java.encoding>UTF-8</java.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <httpdns.version>1.0.0-SNAPSHOT</httpdns.version>
-        <spring.version>3.2.16.RELEASE</spring.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
     </properties>
 
     <modules>
